@@ -91,7 +91,7 @@ namespace AutoServis.Models
 		public string Prezime { get; set; }
 
 		[Display(Name="Broj telefona")]
-		[RegularExpression(@"[0-9]{8,12}", ErrorMessage = "Broj telefona mora sadržavati samo brojeve.")]
+		[RegularExpression(@"[0-9]{8,12}", ErrorMessage = "Broj telefona mora sadržavati samo brojeve i biti dugačak između 8 i 12 znamenaka.")]
 		public string BrTel { get; set; }
     }
 
