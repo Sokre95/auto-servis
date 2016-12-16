@@ -181,6 +181,14 @@
     <Compile Include="Migrations\201612142053383_DBSchema.Designer.cs">
       <DependentUpon>201612142053383_DBSchema.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612161052183_DodatnaPoljaKorisnik.cs" />
+    <Compile Include="Migrations\201612161052183_DodatnaPoljaKorisnik.Designer.cs">
+      <DependentUpon>201612161052183_DodatnaPoljaKorisnik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612161333408_Admin.cs" />
+    <Compile Include="Migrations\201612161333408_Admin.Designer.cs">
+      <DependentUpon>201612161333408_Admin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Administrator.cs" />
@@ -199,6 +207,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\car_repair.jpg" />
+    <Content Include="Content\flatly.css" />
+    <Content Include="Content\paper.css" />
+    <Content Include="Content\repair.jpg" />
+    <Content Include="Content\Styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -269,6 +282,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612142053383_DBSchema.resx">
       <DependentUpon>201612142053383_DBSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612161052183_DodatnaPoljaKorisnik.resx">
+      <DependentUpon>201612161052183_DodatnaPoljaKorisnik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612161333408_Admin.resx">
+      <DependentUpon>201612161333408_Admin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

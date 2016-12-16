@@ -1,3 +1,5 @@
+using AutoServis.Models;
+
 namespace AutoServis
 {
     using System;
@@ -6,8 +8,7 @@ namespace AutoServis
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Usluga")]
-    public partial class Usluga
+    public class Usluga
     {
         public Usluga()
         {

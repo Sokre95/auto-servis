@@ -1,3 +1,5 @@
+using AutoServis.Models;
+
 namespace AutoServis
 {
     using System;
@@ -5,9 +7,8 @@ namespace AutoServis
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
-    [Table("Serviser")]
-    public partial class Serviser
+	
+    public class Serviser
     {
         public Serviser()
         {

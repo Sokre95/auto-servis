@@ -55,30 +55,44 @@ namespace AutoServis.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Lozinka")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Zapamti me?")]
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
-    {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+	public class RegisterViewModel
+	{
+		[Required(ErrorMessage = "Unesite email.")]
+		[EmailAddress(ErrorMessage = "Email adresa nije u ispravnom formatu.")]
+		[Display(Name = "Email")]
+		public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+		[Required]
+		[StringLength(100, ErrorMessage = "{0} mora biti najmanje {2} znakova.", MinimumLength = 6)]
+		[DataType(DataType.Password, ErrorMessage = "Lozinka mora sadrzavati to to i to.")]
+		[Display(Name = "Lozinka")]
+		public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+		[DataType(DataType.Password)]
+		[Display(Name = "Potvrdite lozinku")]
+		[Compare("Password", ErrorMessage = "Lozinka i potvrđena lozinka se ne podudaraju.")]
+		public string ConfirmPassword { get; set; }
+
+		[Required(ErrorMessage = "Unesite ime.")]
+		//[RegularExpression(@"[A-Z]*", ErrorMessage = "Prvo slovo imena mora biti veliko.")]
+		[StringLength(100)]
+	    public string Ime { get; set; }
+
+		[Required(ErrorMessage = "Unesite prezime.")]
+		//[RegularExpression(@"^[A-Z][a-z]*$", ErrorMessage = "Prvo slovo prezimena mora biti veliko.")]
+		[StringLength(100)]
+		public string Prezime { get; set; }
+
+		[Display(Name="Broj telefona")]
+		[RegularExpression(@"[0-9]{8,12}", ErrorMessage = "Broj telefona mora sadržavati samo brojeve.")]
+		public string BrTel { get; set; }
     }
 
     public class ResetPasswordViewModel
