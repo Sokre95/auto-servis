@@ -14,5 +14,15 @@ namespace AutoServis.Controllers
         {
             return View();
         }
-    }
+
+		public ActionResult DodajServisera()
+		{
+			return HttpNotFound();
+		}
+
+		public ActionResult DodajKorisnika()
+		{
+			return HttpNotFound();
+		}
+	}
 }
