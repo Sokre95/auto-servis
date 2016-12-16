@@ -31,7 +31,7 @@ namespace AutoServis.Models
 
         public virtual ICollection<DodatnaUsluga> DodatnaUsluga { get; set; }
 
-        public virtual Korisnik Korisnik { get; set; }
+        public virtual ApplicationUser Korisnik { get; set; }
 
         public virtual Vozilo Vozilo { get; set; }
 

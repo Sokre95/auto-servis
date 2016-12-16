@@ -24,7 +24,7 @@ namespace AutoServis
 
         public int id_korisnik { get; set; }
 
-        public virtual Korisnik Korisnik { get; set; }
+        public virtual ApplicationUser Korisnik { get; set; }
 
         public virtual ICollection<Popravak> Popravak { get; set; }
     }
