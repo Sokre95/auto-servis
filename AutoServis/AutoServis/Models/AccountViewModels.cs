@@ -81,12 +81,12 @@ namespace AutoServis.Models
 		public string ConfirmPassword { get; set; }
 
 		[Required(ErrorMessage = "Unesite ime.")]
-		//[RegularExpression(@"[A-Z]*", ErrorMessage = "Prvo slovo imena mora biti veliko.")]
+		//[RegularExpression(@"[A-Z][\p{Ll}a-z]", ErrorMessage = "Prvo slovo imena mora biti veliko.")]
 		[StringLength(100)]
 	    public string Ime { get; set; }
 
 		[Required(ErrorMessage = "Unesite prezime.")]
-		//[RegularExpression(@"^[A-Z][a-z]*$", ErrorMessage = "Prvo slovo prezimena mora biti veliko.")]
+		//[RegularExpression(@"^[A-Z][\p{L}a-z]*$", ErrorMessage = "Prvo slovo prezimena mora biti veliko.")]
 		[StringLength(100)]
 		public string Prezime { get; set; }
 

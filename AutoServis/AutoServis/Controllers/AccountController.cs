@@ -164,8 +164,6 @@ namespace AutoServis.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-					//await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
 					// Kod za dodavanje korisnika sa admin ovlastima u bazu
 					//var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
 					//var roleManager = new RoleManager<IdentityRole>(roleStore);
@@ -173,10 +171,19 @@ namespace AutoServis.Controllers
 					//            await UserManager.AddToRoleAsync(user.Id, "Admin");
 
 					// Kod za dodavanje korisnika sa serviser ovlastima u bazu
+					//var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+					//var roleManager = new RoleManager<IdentityRole>(roleStore);
+					//await roleManager.CreateAsync(new IdentityRole("Serviser"));
+					//await UserManager.AddToRoleAsync(user.Id, "Serviser");
+
+					// Kod za dodavanje korisnika sa serviser ovlastima u bazu
 					var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
 					var roleManager = new RoleManager<IdentityRole>(roleStore);
-					await roleManager.CreateAsync(new IdentityRole("Serviser"));
-					await UserManager.AddToRoleAsync(user.Id, "Serviser");
+					await roleManager.CreateAsync(new IdentityRole("Korisnik"));
+					await UserManager.AddToRoleAsync(user.Id, "Korisnik");
+
+					await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
 
 					// For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
 					// Send an email with this link
