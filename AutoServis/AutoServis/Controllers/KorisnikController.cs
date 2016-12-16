@@ -14,5 +14,11 @@ namespace AutoServis.Controllers
         {
             return View();
         }
+
+		public ActionResult Add()
+		{
+			// Implementation
+			return HttpNotFound();
+		}
     }
 }
