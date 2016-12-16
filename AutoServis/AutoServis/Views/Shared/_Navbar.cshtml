@@ -13,6 +13,7 @@
 				@if (User.IsInRole("Korisnik"))
 				{
 					<li>@Html.ActionLink("Početna stranica", "Index", "Korisnik")</li>
+					<li>@Html.ActionLink("Dodaj vozilo", "Add", "Korisnik")</li>
 				}
 				@if (User.IsInRole("Serviser"))
 				{
@@ -23,10 +24,6 @@
 					<li>@Html.ActionLink("Početna stranica", "Index", "Admin")</li>
 					<li>@Html.ActionLink("Dodaj servisera", "DodajServisera", "Admin")</li>
 					<li>@Html.ActionLink("Dodaj korisnika", "DodajKorisnika", "Admin")</li>
-				}
-				@if (User.IsInRole("Korisnik"))
-				{
-					<li>@Html.ActionLink("Dodaj vozilo", "Add", "Korisnik")</li>
 				}
 				<li>@Html.ActionLink("Info", "About", "Home")</li>
 				<li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
