@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.AccessControl;
 using System.Security.Claims;
@@ -11,7 +12,6 @@ namespace AutoServis.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-
 	    public string Ime { get; set; }
 
 		public string Prezime { get; set; }
@@ -19,7 +19,11 @@ namespace AutoServis.Models
 		[Display(Name="Broj telefona")]
 		public string BrojTel { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+		public virtual ICollection<Popravak> Popravak { get; set; }
+
+		public virtual ICollection<Vozilo> Vozilo { get; set; }
+
+		public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
@@ -41,12 +45,19 @@ namespace AutoServis.Models
         }
 
 	    public DbSet<Administrator> Administratori { get; set; }
+
 		public DbSet<DodatnaUsluga> DodatneUsluge { get; set; }
-		public DbSet<Korisnik> Korisnici { get; set; }
+
+		//public DbSet<Korisnik> Korisnici { get; set; }
+
 		public DbSet<Popravak> Popravci { get; set; }
+
 		public DbSet<Serviser> Serviseri { get; set; }
+
 		public DbSet<Usluga> Usluge { get; set; }
+
 		public DbSet<Vozilo> Vozila { get; set; }
+
 		public DbSet<ZamjenskoVozilo> ZamjenskaVozila { get; set; }
 	}
 }

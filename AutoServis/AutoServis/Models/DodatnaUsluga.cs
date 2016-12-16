@@ -8,7 +8,6 @@ namespace AutoServis
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("DodatnaUsluga")]
     public partial class DodatnaUsluga
     {
         public int id { get; set; }
