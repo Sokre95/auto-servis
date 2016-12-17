@@ -200,9 +200,8 @@ namespace AutoServis.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
+		// GET: /Account/ConfirmEmail
+		[AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)

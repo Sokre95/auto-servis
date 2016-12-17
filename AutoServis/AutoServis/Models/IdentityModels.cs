@@ -48,8 +48,6 @@ namespace AutoServis.Models
 
 		public DbSet<DodatnaUsluga> DodatneUsluge { get; set; }
 
-		//public DbSet<Korisnik> Korisnici { get; set; }
-
 		public DbSet<Popravak> Popravci { get; set; }
 
 		public DbSet<Serviser> Serviseri { get; set; }

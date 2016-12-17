@@ -95,6 +95,10 @@ namespace AutoServis.Models
 		public string BrTel { get; set; }
     }
 
+	public class ServiserViewModel : RegisterViewModel
+	{
+	}
+
     public class ResetPasswordViewModel
     {
         [Required]
