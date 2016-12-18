@@ -63,17 +63,31 @@ namespace AutoServis.Controllers
 
 		public ActionResult KontaktServisa()
 		{
-			return View();
+		    var model = _context.Kontakti.First();
+
+			return View(model);
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult KontaktServisa(Kontakt model)
 		{
-			_context.Kontakti.Add(model);
-			_context.SaveChanges();
+		    if (ModelState.IsValid)
+		    {
+		        var dataFromDB = _context.Kontakti.First();
 
-			return RedirectToAction("Index", "Admin");
+		        dataFromDB.Adresa = model.Adresa;
+		        dataFromDB.BrojTel = model.BrojTel;
+		        dataFromDB.Email = model.Email;
+		        dataFromDB.ImeServisa = model.ImeServisa;
+		        dataFromDB.Mjesto = model.Mjesto;
+
+                _context.SaveChanges();
+
+                return RedirectToAction("Contact", "Home");
+            }
+
+		    return View(model);
 		}
 
 		public ActionResult DodajKorisnika()

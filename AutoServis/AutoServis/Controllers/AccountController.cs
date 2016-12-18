@@ -152,7 +152,7 @@ namespace AutoServis.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
+                var user = new Korisnik
                 {
 	                UserName = model.Email,
 					Email = model.Email,
@@ -177,9 +177,9 @@ namespace AutoServis.Controllers
 					//await UserManager.AddToRoleAsync(user.Id, "Serviser");
 
 					// Kod za dodavanje korisnika sa serviser ovlastima u bazu
-					var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-					var roleManager = new RoleManager<IdentityRole>(roleStore);
-					await roleManager.CreateAsync(new IdentityRole("Korisnik"));
+					//var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+					//var roleManager = new RoleManager<IdentityRole>(roleStore);
+					//await roleManager.CreateAsync(new IdentityRole("Korisnik"));
 					await UserManager.AddToRoleAsync(user.Id, "Korisnik");
 
 					await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

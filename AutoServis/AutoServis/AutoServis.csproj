@@ -212,12 +212,24 @@
     <Compile Include="Migrations\201612181454160_SeedBazeKorisnikom.Designer.cs">
       <DependentUpon>201612181454160_SeedBazeKorisnikom.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612181550062_Fix.cs" />
+    <Compile Include="Migrations\201612181550062_Fix.Designer.cs">
+      <DependentUpon>201612181550062_Fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612181553337_SeedBazeKontaktPodacima.cs" />
+    <Compile Include="Migrations\201612181553337_SeedBazeKontaktPodacima.Designer.cs">
+      <DependentUpon>201612181553337_SeedBazeKontaktPodacima.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612181658013_PromjeneModela.cs" />
+    <Compile Include="Migrations\201612181658013_PromjeneModela.Designer.cs">
+      <DependentUpon>201612181658013_PromjeneModela.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\DodatnaUsluga.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kontakt.cs" />
+    <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Popravak.cs" />
     <Compile Include="Models\Serviser.cs" />
@@ -332,6 +344,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612181454160_SeedBazeKorisnikom.resx">
       <DependentUpon>201612181454160_SeedBazeKorisnikom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612181550062_Fix.resx">
+      <DependentUpon>201612181550062_Fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612181553337_SeedBazeKontaktPodacima.resx">
+      <DependentUpon>201612181553337_SeedBazeKontaktPodacima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612181658013_PromjeneModela.resx">
+      <DependentUpon>201612181658013_PromjeneModela.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.AccessControl;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -18,10 +19,6 @@ namespace AutoServis.Models
 
 		[Display(Name="Broj telefona")]
 		public string BrojTel { get; set; }
-
-		public virtual ICollection<Popravak> Popravak { get; set; }
-
-		public virtual ICollection<Vozilo> Vozilo { get; set; }
 
 		public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -44,13 +41,13 @@ namespace AutoServis.Models
             return new ApplicationDbContext();
         }
 
-	    public DbSet<Administrator> Administratori { get; set; }
-
 		public DbSet<DodatnaUsluga> DodatneUsluge { get; set; }
 
-		public DbSet<Popravak> Popravci { get; set; }
+        public DbSet<Serviser> Serviseri { get; set; }
 
-		public DbSet<Serviser> Serviseri { get; set; }
+        public DbSet<Korisnik> Korisnici { get; set; }
+
+		public DbSet<Popravak> Popravci { get; set; }
 
 		public DbSet<Usluga> Usluge { get; set; }
 
@@ -59,5 +56,11 @@ namespace AutoServis.Models
 		public DbSet<ZamjenskoVozilo> ZamjenskaVozila { get; set; }
 
 	    public DbSet<Kontakt> Kontakti { get; set; }
-	}
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Kontakt>().ToTable("Kontakt");
+        }
+    }
 }
