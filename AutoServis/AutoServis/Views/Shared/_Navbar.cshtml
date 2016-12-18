@@ -24,12 +24,10 @@
 					<li>@Html.ActionLink("Početna stranica", "Index", "Admin")</li>
 					<li>@Html.ActionLink("Dodaj servisera", "DodajServisera", "Admin")</li>
 					<li>@Html.ActionLink("Dodaj korisnika", "DodajKorisnika", "Admin")</li>
-					<li>@Html.ActionLink("Podaci o servisu", "PodaciOServisu", "Admin")</li>
-					<li>@Html.ActionLink("Kontakt podaci", "KontakServisa", "Admin")</li>
+					<li>@Html.ActionLink("Kontakt podaci", "KontaktServisa", "Admin")</li>
 				}
-				@if (User.IsInRole("Serviser") || User.IsInRole("Korisnik"))
+				@if (!(User.IsInRole("Admin")))
 				{
-					<li>@Html.ActionLink("Info", "About", "Home")</li>
 					<li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
 				}
 			</ul>

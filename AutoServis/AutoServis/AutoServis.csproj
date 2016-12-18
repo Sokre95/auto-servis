@@ -204,11 +204,16 @@
     <Compile Include="Migrations\201612161810369_AppUserFK.Designer.cs">
       <DependentUpon>201612161810369_AppUserFK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612171816418_KontaktServisa.cs" />
+    <Compile Include="Migrations\201612171816418_KontaktServisa.Designer.cs">
+      <DependentUpon>201612171816418_KontaktServisa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\DodatnaUsluga.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Kontakt.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Popravak.cs" />
     <Compile Include="Models\Serviser.cs" />
@@ -256,7 +261,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -284,6 +288,7 @@
     <Content Include="Views\Korisnik\Index.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Admin\DodajServisera.cshtml" />
+    <Content Include="Views\Admin\KontaktServisa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612161810369_AppUserFK.resx">
       <DependentUpon>201612161810369_AppUserFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612171816418_KontaktServisa.resx">
+      <DependentUpon>201612171816418_KontaktServisa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

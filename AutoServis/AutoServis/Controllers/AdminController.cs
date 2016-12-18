@@ -13,8 +13,14 @@ namespace AutoServis.Controllers
 {
 	[Authorize(Roles = "Admin")]
     public class AdminController : Controller
-    {
-        // GET: Admin
+	{
+		private readonly ApplicationDbContext _context;
+
+		public AdminController()
+		{
+			_context = new ApplicationDbContext();
+		}
+		
         public ActionResult Index()
         {
             return View();
@@ -22,7 +28,7 @@ namespace AutoServis.Controllers
 		
 		public ActionResult DodajServisera()
 		{
-			return View();  // Vrati formu
+			return View();
 		}
 
 		[HttpPost]
@@ -55,14 +61,19 @@ namespace AutoServis.Controllers
 			return View(model);
 		}
 
-		public ActionResult PodaciOServisu()
+		public ActionResult KontaktServisa()
 		{
-			return HttpNotFound();
+			return View();
 		}
 
-		public ActionResult KontakServisa()
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult KontaktServisa(Kontakt model)
 		{
-			return HttpNotFound();
+			_context.Kontakti.Add(model);
+			_context.SaveChanges();
+
+			return RedirectToAction("Index", "Admin");
 		}
 
 		public ActionResult DodajKorisnika()

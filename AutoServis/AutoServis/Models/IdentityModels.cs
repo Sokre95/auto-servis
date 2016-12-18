@@ -57,5 +57,7 @@ namespace AutoServis.Models
 		public DbSet<Vozilo> Vozila { get; set; }
 
 		public DbSet<ZamjenskoVozilo> ZamjenskaVozila { get; set; }
+
+	    public DbSet<Kontakt> Kontakti { get; set; }
 	}
 }
