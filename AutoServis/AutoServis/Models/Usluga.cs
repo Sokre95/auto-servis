@@ -1,6 +1,6 @@
 using AutoServis.Models;
 
-namespace AutoServis
+namespace AutoServis.Models
 {
     using System;
     using System.Collections.Generic;
@@ -10,15 +10,10 @@ namespace AutoServis
 
     public class Usluga
     {
-        public Usluga()
-        {
-            Popravak = new HashSet<Popravak>();
-        }
-
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [StringLength(100)]
-        public string opis { get; set; }
+        public string Opis { get; set; }
 
         public virtual ICollection<Popravak> Popravak { get; set; }
     }

@@ -224,15 +224,37 @@
     <Compile Include="Migrations\201612181658013_PromjeneModela.Designer.cs">
       <DependentUpon>201612181658013_PromjeneModela.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612182007148_GodinaProizvodnjeNotNull.cs" />
+    <Compile Include="Migrations\201612182007148_GodinaProizvodnjeNotNull.Designer.cs">
+      <DependentUpon>201612182007148_GodinaProizvodnjeNotNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612182014172_IzmjenaImenaAtributa.cs" />
+    <Compile Include="Migrations\201612182014172_IzmjenaImenaAtributa.Designer.cs">
+      <DependentUpon>201612182014172_IzmjenaImenaAtributa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612182041336_DodanTipVozila.cs" />
+    <Compile Include="Migrations\201612182041336_DodanTipVozila.Designer.cs">
+      <DependentUpon>201612182041336_DodanTipVozila.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612182044511_PopunaBazeTipovimaVozila.cs" />
+    <Compile Include="Migrations\201612182044511_PopunaBazeTipovimaVozila.Designer.cs">
+      <DependentUpon>201612182044511_PopunaBazeTipovimaVozila.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612182103398_TipVozilaVezaSaBazom.cs" />
+    <Compile Include="Migrations\201612182103398_TipVozilaVezaSaBazom.Designer.cs">
+      <DependentUpon>201612182103398_TipVozilaVezaSaBazom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DodatnaUsluga.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kontakt.cs" />
     <Compile Include="Models\Korisnik.cs" />
+    <Compile Include="Models\KorisnikViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Popravak.cs" />
     <Compile Include="Models\Serviser.cs" />
+    <Compile Include="Models\TipVozila.cs" />
     <Compile Include="Models\Usluga.cs" />
     <Compile Include="Models\Vozilo.cs" />
     <Compile Include="Models\ZamjenskoVozilo.cs" />
@@ -353,6 +375,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612181658013_PromjeneModela.resx">
       <DependentUpon>201612181658013_PromjeneModela.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612182007148_GodinaProizvodnjeNotNull.resx">
+      <DependentUpon>201612182007148_GodinaProizvodnjeNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612182014172_IzmjenaImenaAtributa.resx">
+      <DependentUpon>201612182014172_IzmjenaImenaAtributa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612182041336_DodanTipVozila.resx">
+      <DependentUpon>201612182041336_DodanTipVozila.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612182044511_PopunaBazeTipovimaVozila.resx">
+      <DependentUpon>201612182044511_PopunaBazeTipovimaVozila.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612182103398_TipVozilaVezaSaBazom.resx">
+      <DependentUpon>201612182103398_TipVozilaVezaSaBazom.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

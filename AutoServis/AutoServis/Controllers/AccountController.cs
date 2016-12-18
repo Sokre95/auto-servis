@@ -18,9 +18,11 @@ namespace AutoServis.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly ApplicationDbContext _context;
 
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -52,18 +54,14 @@ namespace AutoServis.Controllers
                 _userManager = value;
             }
         }
-
-        //
-        // GET: /Account/Login
+        
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //
-        // POST: /Account/Login
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -91,9 +89,7 @@ namespace AutoServis.Controllers
                     return View(model);
             }
         }
-
-        //
-        // GET: /Account/VerifyCode
+        
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -104,9 +100,7 @@ namespace AutoServis.Controllers
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
-        //
-        // POST: /Account/VerifyCode
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -134,17 +128,20 @@ namespace AutoServis.Controllers
                     return View(model);
             }
         }
-
-        //
-        // GET: /Account/Register
+        
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
-        }
+            var tipoviVozila = _context.TipoviVozila.ToList();
 
-        //
-        // POST: /Account/Register
+            var viewModel = new KorisnikViewModel
+            {
+                TipoviVozila = tipoviVozila
+            };
+
+            return View(viewModel);
+        }
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

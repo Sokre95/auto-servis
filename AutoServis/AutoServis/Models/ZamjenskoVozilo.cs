@@ -10,18 +10,13 @@ namespace AutoServis
 	
     public class ZamjenskoVozilo
     {
-        public ZamjenskoVozilo()
-        {
-            Popravak = new HashSet<Popravak>();
-        }
-
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(10)]
-        public string regOznaka { get; set; }
+        public string RegOznaka { get; set; }
 
-        public bool dostupno { get; set; }
+        public bool Dostupno { get; set; }
 
         public virtual ICollection<Popravak> Popravak { get; set; }
     }

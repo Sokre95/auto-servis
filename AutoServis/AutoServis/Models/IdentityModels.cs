@@ -57,10 +57,13 @@ namespace AutoServis.Models
 
 	    public DbSet<Kontakt> Kontakti { get; set; }
 
+        public DbSet<TipVozila> TipoviVozila { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Kontakt>().ToTable("Kontakt");
+            modelBuilder.Entity<TipVozila>().ToTable("TipVozila");
         }
     }
 }

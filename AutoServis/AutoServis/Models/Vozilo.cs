@@ -1,6 +1,6 @@
 using AutoServis.Models;
 
-namespace AutoServis
+namespace AutoServis.Models
 {
     using System;
     using System.Collections.Generic;
@@ -10,22 +10,17 @@ namespace AutoServis
 	
     public class Vozilo
     {
-        public Vozilo()
-        {
-            Popravak = new HashSet<Popravak>();
-        }
+        public int Id { get; set; }
 
-        public int id { get; set; }
-
-        public DateTime? godProizv { get; set; }
+        public DateTime GodProizv { get; set; }
 
         [StringLength(10)]
-        public string regOznaka { get; set; }
-
-        public int id_korisnik { get; set; }
+        public string RegOznaka { get; set; }
 
         public virtual ApplicationUser Korisnik { get; set; }
 
         public virtual ICollection<Popravak> Popravak { get; set; }
+
+        public virtual TipVozila TipVozila { get; set; }
     }
 }

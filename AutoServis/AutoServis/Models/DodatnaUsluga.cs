@@ -1,6 +1,6 @@
 using AutoServis.Models;
 
-namespace AutoServis
+namespace AutoServis.Models
 {
     using System;
     using System.Collections.Generic;
@@ -10,12 +10,12 @@ namespace AutoServis
 
     public partial class DodatnaUsluga
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public int id_popravak { get; set; }
+        public int IdPopravak { get; set; }
 
         [StringLength(500)]
-        public string opis { get; set; }
+        public string Opis { get; set; }
 
         public virtual Popravak Popravak { get; set; }
     }

@@ -8,26 +8,18 @@ namespace AutoServis.Models
 	
     public class Popravak
     {
-        public Popravak()
-        {
-            DodatnaUsluga = new HashSet<DodatnaUsluga>();
-            Usluga = new HashSet<Usluga>();
-            ZamjenskoVozilo = new HashSet<ZamjenskoVozilo>();
-        }
-
-        public int id { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime datumVrijeme { get; set; }
+        public int Id { get; set; }
+        
+        public DateTime DatumVrijeme { get; set; }
 
         [StringLength(500)]
-        public string dodatniOpis { get; set; }
+        public string DodatniOpis { get; set; }
 
-        public int id_korisnik { get; set; }
+        public int IdKorisnik { get; set; }
 
-        public int id_Vozilo { get; set; }
+        public int IdVozilo { get; set; }
 
-        public int id_serviser { get; set; }
+        public int IdServiser { get; set; }
 
         public virtual ICollection<DodatnaUsluga> DodatnaUsluga { get; set; }
 
