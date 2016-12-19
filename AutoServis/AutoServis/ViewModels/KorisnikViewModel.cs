@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using AutoServis.Models;
 
-namespace AutoServis.Models
+namespace AutoServis.ViewModels
 {
     public class KorisnikViewModel : RegisterViewModel
     {

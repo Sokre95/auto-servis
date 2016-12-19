@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoServis.Models;
+using AutoServis.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -45,8 +46,7 @@ namespace AutoServis.Controllers
 
 		public ActionResult Add()
 		{
-			// Implementation
-			return HttpNotFound();
+		    return View();
 		}
     }
 }

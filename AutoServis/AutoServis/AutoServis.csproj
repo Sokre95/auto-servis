@@ -193,19 +193,19 @@
       <DependentUpon>201612191637402_GodProizvodnjeString.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\IndexKorisnikViewModel.cs" />
+    <Compile Include="ViewModels\IndexKorisnikViewModel.cs" />
     <Compile Include="Models\Kontakt.cs" />
     <Compile Include="Models\Korisnik.cs" />
-    <Compile Include="Models\KorisnikViewModel.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="ViewModels\KorisnikViewModel.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Popravak.cs" />
     <Compile Include="Models\Serviser.cs" />
     <Compile Include="Models\TipVozila.cs" />
     <Compile Include="Models\Usluga.cs" />
     <Compile Include="Models\Vozilo.cs" />
-    <Compile Include="Models\VoziloViewModel.cs" />
+    <Compile Include="ViewModels\VoziloViewModel.cs" />
     <Compile Include="Models\ZamjenskoVozilo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -277,6 +277,7 @@
     <Content Include="Views\Admin\DodajServisera.cshtml" />
     <Content Include="Views\Admin\KontaktServisa.cshtml" />
     <Content Include="Views\Account\TempRegister.cshtml" />
+    <Content Include="Views\Korisnik\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

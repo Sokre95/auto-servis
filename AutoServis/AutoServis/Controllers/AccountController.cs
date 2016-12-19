@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AutoServis.Models;
+using AutoServis.ViewModels;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AutoServis.Controllers
