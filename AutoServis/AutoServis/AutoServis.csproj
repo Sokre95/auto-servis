@@ -195,6 +195,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ViewModels\DodajVoziloViewModel.cs" />
     <Compile Include="ViewModels\IndexKorisnikViewModel.cs" />
     <Compile Include="Models\Kontakt.cs" />
     <Compile Include="Models\Korisnik.cs" />
@@ -215,6 +216,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\car_repair.jpg" />
+    <Content Include="Content\egg.jpg" />
     <Content Include="Content\flatly.css" />
     <Content Include="Content\paper.css" />
     <Content Include="Content\repair.jpg" />

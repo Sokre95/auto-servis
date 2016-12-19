@@ -12,8 +12,14 @@ namespace AutoServis.Controllers
 {
 	[Authorize(Roles = "Korisnik")]
     public class KorisnikController : Controller
-    {
-        // GET: Korisnik
+	{
+	    private readonly ApplicationDbContext _context;
+
+        public KorisnikController()
+        {
+            _context = new ApplicationDbContext();    
+        }
+
         public ActionResult Index()
         {
             Korisnik user = (Korisnik)System.Web.HttpContext.Current.GetOwinContext()
@@ -46,7 +52,33 @@ namespace AutoServis.Controllers
 
 		public ActionResult Add()
 		{
-		    return View();
+
+		    var tipoviVozila = _context.TipoviVozila.ToList();
+
+		    var viewModel = new DodajVoziloViewModel
+		    {
+		        TipoviVozila = tipoviVozila
+		    };
+
+		    return View(viewModel);
 		}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+	    public ActionResult Add(DodajVoziloViewModel model)
+	    {
+	        var vozilo = new Vozilo
+	        {
+	            GodProizv = model.GodProizv,
+	            RegOznaka = model.RegOznaka,
+	            TipVozilaId = model.TipVozilaId,
+	            KorisnikId = System.Web.HttpContext.Current.User.Identity.GetUserId()
+	        };
+
+	        _context.Vozila.Add(vozilo);
+	        _context.SaveChanges();
+
+            return RedirectToAction("Index", "Korisnik");
+	    }
     }
 }
