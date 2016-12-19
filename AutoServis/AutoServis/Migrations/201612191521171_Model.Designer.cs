@@ -7,13 +7,13 @@ namespace AutoServis.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AppUserFK : IMigrationMetadata
+    public sealed partial class Model : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AppUserFK));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Model));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612161810369_AppUserFK"; }
+            get { return "201612191521171_Model"; }
         }
         
         string IMigrationMetadata.Source

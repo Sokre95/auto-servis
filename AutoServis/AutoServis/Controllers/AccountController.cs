@@ -132,63 +132,64 @@ namespace AutoServis.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            var tipoviVozila = _context.TipoviVozila.ToList();
+            //var tipoviVozila = _context.TipoviVozila.ToList();
 
-            var viewModel = new KorisnikViewModel
-            {
-                TipoviVozila = tipoviVozila
-            };
+            //var viewModel = new KorisnikViewModel
+            //{
+            //    TipoviVozila = tipoviVozila
+            //};
 
-            return View(viewModel);
+            return View();
         }
         
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(KorisnikViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new Korisnik
                 {
-	                UserName = model.Email,
-					Email = model.Email,
-					Ime = model.Ime,
-					Prezime = model.Prezime,
-					BrojTel = model.BrTel
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Ime = model.Ime,
+                    Prezime = model.Prezime,
+                    BrojTel = model.BrojTel
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
-					// Kod za dodavanje korisnika sa admin ovlastima u bazu
-					//var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-					//var roleManager = new RoleManager<IdentityRole>(roleStore);
-					//            await roleManager.CreateAsync(new IdentityRole("Admin"));
-					//            await UserManager.AddToRoleAsync(user.Id, "Admin");
+                    // Kod za dodavanje korisnika sa admin ovlastima u bazu
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("Admin"));
+                    //await UserManager.AddToRoleAsync(user.Id, "Admin");
 
-					// Kod za dodavanje korisnika sa serviser ovlastima u bazu
-					//var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-					//var roleManager = new RoleManager<IdentityRole>(roleStore);
-					//await roleManager.CreateAsync(new IdentityRole("Serviser"));
-					//await UserManager.AddToRoleAsync(user.Id, "Serviser");
+                    // Kod za dodavanje korisnika sa serviser ovlastima u bazu
+                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    await roleManager.CreateAsync(new IdentityRole("Serviser"));
+                    await UserManager.AddToRoleAsync(user.Id, "Serviser");
 
-					// Kod za dodavanje korisnika sa serviser ovlastima u bazu
-					//var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-					//var roleManager = new RoleManager<IdentityRole>(roleStore);
-					//await roleManager.CreateAsync(new IdentityRole("Korisnik"));
-					await UserManager.AddToRoleAsync(user.Id, "Korisnik");
+                    // Kod za dodavanje korisnika sa serviser ovlastima u bazu
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("Korisnik"));
+                    //await UserManager.AddToRoleAsync(user.Id, "Korisnik");
 
-					await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
 
-					// For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-					// Send an email with this link
-					// string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-					// var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-					// await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-					return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

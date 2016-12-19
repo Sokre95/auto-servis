@@ -176,77 +176,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612142050148_InitialMigration.cs" />
-    <Compile Include="Migrations\201612142050148_InitialMigration.Designer.cs">
-      <DependentUpon>201612142050148_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201612191521171_Model.cs" />
+    <Compile Include="Migrations\201612191521171_Model.Designer.cs">
+      <DependentUpon>201612191521171_Model.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612142053383_DBSchema.cs" />
-    <Compile Include="Migrations\201612142053383_DBSchema.Designer.cs">
-      <DependentUpon>201612142053383_DBSchema.cs</DependentUpon>
+    <Compile Include="Migrations\201612191558037_SeedBaze.cs" />
+    <Compile Include="Migrations\201612191558037_SeedBaze.Designer.cs">
+      <DependentUpon>201612191558037_SeedBaze.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612161052183_DodatnaPoljaKorisnik.cs" />
-    <Compile Include="Migrations\201612161052183_DodatnaPoljaKorisnik.Designer.cs">
-      <DependentUpon>201612161052183_DodatnaPoljaKorisnik.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612161333408_Admin.cs" />
-    <Compile Include="Migrations\201612161333408_Admin.Designer.cs">
-      <DependentUpon>201612161333408_Admin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612161529104_Serviseri.cs" />
-    <Compile Include="Migrations\201612161529104_Serviseri.Designer.cs">
-      <DependentUpon>201612161529104_Serviseri.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612161745202_AppUserUmjestoKorisnika.cs" />
-    <Compile Include="Migrations\201612161745202_AppUserUmjestoKorisnika.Designer.cs">
-      <DependentUpon>201612161745202_AppUserUmjestoKorisnika.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612161810369_AppUserFK.cs" />
-    <Compile Include="Migrations\201612161810369_AppUserFK.Designer.cs">
-      <DependentUpon>201612161810369_AppUserFK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612171816418_KontaktServisa.cs" />
-    <Compile Include="Migrations\201612171816418_KontaktServisa.Designer.cs">
-      <DependentUpon>201612171816418_KontaktServisa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612181454160_SeedBazeKorisnikom.cs" />
-    <Compile Include="Migrations\201612181454160_SeedBazeKorisnikom.Designer.cs">
-      <DependentUpon>201612181454160_SeedBazeKorisnikom.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612181550062_Fix.cs" />
-    <Compile Include="Migrations\201612181550062_Fix.Designer.cs">
-      <DependentUpon>201612181550062_Fix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612181553337_SeedBazeKontaktPodacima.cs" />
-    <Compile Include="Migrations\201612181553337_SeedBazeKontaktPodacima.Designer.cs">
-      <DependentUpon>201612181553337_SeedBazeKontaktPodacima.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612181658013_PromjeneModela.cs" />
-    <Compile Include="Migrations\201612181658013_PromjeneModela.Designer.cs">
-      <DependentUpon>201612181658013_PromjeneModela.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612182007148_GodinaProizvodnjeNotNull.cs" />
-    <Compile Include="Migrations\201612182007148_GodinaProizvodnjeNotNull.Designer.cs">
-      <DependentUpon>201612182007148_GodinaProizvodnjeNotNull.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612182014172_IzmjenaImenaAtributa.cs" />
-    <Compile Include="Migrations\201612182014172_IzmjenaImenaAtributa.Designer.cs">
-      <DependentUpon>201612182014172_IzmjenaImenaAtributa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612182041336_DodanTipVozila.cs" />
-    <Compile Include="Migrations\201612182041336_DodanTipVozila.Designer.cs">
-      <DependentUpon>201612182041336_DodanTipVozila.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612182044511_PopunaBazeTipovimaVozila.cs" />
-    <Compile Include="Migrations\201612182044511_PopunaBazeTipovimaVozila.Designer.cs">
-      <DependentUpon>201612182044511_PopunaBazeTipovimaVozila.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612182103398_TipVozilaVezaSaBazom.cs" />
-    <Compile Include="Migrations\201612182103398_TipVozilaVezaSaBazom.Designer.cs">
-      <DependentUpon>201612182103398_TipVozilaVezaSaBazom.cs</DependentUpon>
+    <Compile Include="Migrations\201612191624400_SeedBaze2.cs" />
+    <Compile Include="Migrations\201612191624400_SeedBaze2.Designer.cs">
+      <DependentUpon>201612191624400_SeedBaze2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\DodatnaUsluga.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kontakt.cs" />
     <Compile Include="Models\Korisnik.cs" />
@@ -327,6 +270,7 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Admin\DodajServisera.cshtml" />
     <Content Include="Views\Admin\KontaktServisa.cshtml" />
+    <Content Include="Views\Account\TempRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -340,56 +284,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612142050148_InitialMigration.resx">
-      <DependentUpon>201612142050148_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612191521171_Model.resx">
+      <DependentUpon>201612191521171_Model.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612142053383_DBSchema.resx">
-      <DependentUpon>201612142053383_DBSchema.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612191558037_SeedBaze.resx">
+      <DependentUpon>201612191558037_SeedBaze.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612161052183_DodatnaPoljaKorisnik.resx">
-      <DependentUpon>201612161052183_DodatnaPoljaKorisnik.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612161333408_Admin.resx">
-      <DependentUpon>201612161333408_Admin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612161529104_Serviseri.resx">
-      <DependentUpon>201612161529104_Serviseri.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612161745202_AppUserUmjestoKorisnika.resx">
-      <DependentUpon>201612161745202_AppUserUmjestoKorisnika.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612161810369_AppUserFK.resx">
-      <DependentUpon>201612161810369_AppUserFK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612171816418_KontaktServisa.resx">
-      <DependentUpon>201612171816418_KontaktServisa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612181454160_SeedBazeKorisnikom.resx">
-      <DependentUpon>201612181454160_SeedBazeKorisnikom.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612181550062_Fix.resx">
-      <DependentUpon>201612181550062_Fix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612181553337_SeedBazeKontaktPodacima.resx">
-      <DependentUpon>201612181553337_SeedBazeKontaktPodacima.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612181658013_PromjeneModela.resx">
-      <DependentUpon>201612181658013_PromjeneModela.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612182007148_GodinaProizvodnjeNotNull.resx">
-      <DependentUpon>201612182007148_GodinaProizvodnjeNotNull.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612182014172_IzmjenaImenaAtributa.resx">
-      <DependentUpon>201612182014172_IzmjenaImenaAtributa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612182041336_DodanTipVozila.resx">
-      <DependentUpon>201612182041336_DodanTipVozila.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612182044511_PopunaBazeTipovimaVozila.resx">
-      <DependentUpon>201612182044511_PopunaBazeTipovimaVozila.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612182103398_TipVozilaVezaSaBazom.resx">
-      <DependentUpon>201612182103398_TipVozilaVezaSaBazom.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612191624400_SeedBaze2.resx">
+      <DependentUpon>201612191624400_SeedBaze2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

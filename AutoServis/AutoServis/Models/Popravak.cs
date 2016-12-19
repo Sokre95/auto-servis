@@ -15,22 +15,24 @@ namespace AutoServis.Models
         [StringLength(500)]
         public string DodatniOpis { get; set; }
 
-        public int IdKorisnik { get; set; }
+        // Strani kljucevi...
+        public int KorisnikId { get; set; }
 
-        public int IdVozilo { get; set; }
+        public int VoziloId { get; set; }
 
-        public int IdServiser { get; set; }
+        public int ServiserId { get; set; }
 
-        public virtual ICollection<DodatnaUsluga> DodatnaUsluga { get; set; }
+        public int ZamjenskoVoziloId { get; set; }
 
-        public virtual ApplicationUser Korisnik { get; set; }
+        // Reference...
+        public virtual Korisnik Korisnik { get; set; }
 
         public virtual Vozilo Vozilo { get; set; }
 
         public virtual Serviser Serviser { get; set; }
+        
+        public virtual ZamjenskoVozilo ZamjenskoVozilo { get; set; }
 
-        public virtual ICollection<Usluga> Usluga { get; set; }
-
-        public virtual ICollection<ZamjenskoVozilo> ZamjenskoVozilo { get; set; }
+        public virtual ICollection<Usluga> Usluge { get; set; }
     }
 }

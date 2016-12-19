@@ -10,6 +10,6 @@ namespace AutoServis.Models
 	
     public class Serviser : ApplicationUser
     {
-        public virtual ICollection<Popravak> Popravak { get; set; }
+        public virtual ICollection<Popravak> Popravci { get; set; }
     }
 }

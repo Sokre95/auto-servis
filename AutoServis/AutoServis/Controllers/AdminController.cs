@@ -43,7 +43,7 @@ namespace AutoServis.Controllers
 					Email = model.Email,
 					Ime = model.Ime,
 					Prezime = model.Prezime,
-					BrojTel = model.BrTel
+					BrojTel = model.BrojTel
 				};
 
 				var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();

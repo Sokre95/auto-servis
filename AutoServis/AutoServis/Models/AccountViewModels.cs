@@ -93,7 +93,7 @@ namespace AutoServis.Models
         [Required(ErrorMessage = "Unesite broj telefona.")]
 		[Display(Name="Broj telefona")]
 		[RegularExpression(@"[0-9]{8,12}", ErrorMessage = "Broj telefona mora sadržavati samo brojeve i biti dugačak između 8 i 12 znamenaka.")]
-		public string BrTel { get; set; }
+		public string BrojTel { get; set; }
     }
 
 	public class ServiserViewModel : RegisterViewModel

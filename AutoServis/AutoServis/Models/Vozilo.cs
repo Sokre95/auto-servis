@@ -1,4 +1,3 @@
-using AutoServis.Models;
 
 namespace AutoServis.Models
 {
@@ -17,10 +16,16 @@ namespace AutoServis.Models
         [StringLength(10)]
         public string RegOznaka { get; set; }
 
+        // Strani kljucevi...
+        public string KorisnikId { get; set; }
+
+        public int TipVozilaId { get; set; }
+
+        // Navigacija...
         public virtual ApplicationUser Korisnik { get; set; }
 
-        public virtual ICollection<Popravak> Popravak { get; set; }
-
         public virtual TipVozila TipVozila { get; set; }
+
+        public virtual ICollection<Popravak> Popravci { get; set; }
     }
 }

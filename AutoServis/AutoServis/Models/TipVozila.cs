@@ -10,5 +10,7 @@ namespace AutoServis.Models
         public int Id { get; set; }
 
         public string Naziv { get; set; }
+
+        public ICollection<Vozilo> Vozila { get; set; }
     }
 }

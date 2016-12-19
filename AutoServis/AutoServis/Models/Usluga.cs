@@ -1,4 +1,3 @@
-using AutoServis.Models;
 
 namespace AutoServis.Models
 {
@@ -15,6 +14,6 @@ namespace AutoServis.Models
         [StringLength(100)]
         public string Opis { get; set; }
 
-        public virtual ICollection<Popravak> Popravak { get; set; }
+        public virtual ICollection<Popravak> Popravci { get; set; }
     }
 }

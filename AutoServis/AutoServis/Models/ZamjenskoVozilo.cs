@@ -1,6 +1,5 @@
-using AutoServis.Models;
 
-namespace AutoServis
+namespace AutoServis.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,6 +17,6 @@ namespace AutoServis
 
         public bool Dostupno { get; set; }
 
-        public virtual ICollection<Popravak> Popravak { get; set; }
+        public virtual ICollection<Popravak> Popravci { get; set; }
     }
 }

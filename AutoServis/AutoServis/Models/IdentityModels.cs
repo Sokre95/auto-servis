@@ -10,7 +10,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AutoServis.Models
 {
-    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
 	    public string Ime { get; set; }
@@ -41,12 +40,6 @@ namespace AutoServis.Models
             return new ApplicationDbContext();
         }
 
-		public DbSet<DodatnaUsluga> DodatneUsluge { get; set; }
-
-        public DbSet<Serviser> Serviseri { get; set; }
-
-        public DbSet<Korisnik> Korisnici { get; set; }
-
 		public DbSet<Popravak> Popravci { get; set; }
 
 		public DbSet<Usluga> Usluge { get; set; }
@@ -62,8 +55,9 @@ namespace AutoServis.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Kontakt>().ToTable("Kontakt");
-            modelBuilder.Entity<TipVozila>().ToTable("TipVozila");
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            //modelBuilder.Entity<Kontakt>().ToTable("Kontakt");
+            //modelBuilder.Entity<TipVozila>().ToTable("TipVozila");
         }
     }
 }
