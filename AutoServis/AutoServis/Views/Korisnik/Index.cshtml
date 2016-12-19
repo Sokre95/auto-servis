@@ -1,8 +1,37 @@
-﻿
+﻿@model AutoServis.Models.IndexKorisnikViewModel
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Pocetna stranica korisnika</h2>
+<h2>Informacije o korisniku</h2>
+<hr/>
+<ul class="list-group list">
+    <li class="list-group-item">
+        Ime : @Model.Ime
+    </li>
+    <li class="list-group-item">
+        Prezime : @Model.Prezime
+    </li>
+    <li class="list-group-item">
+        Broj telefona : @Model.BrojTel
+    </li>
+    <li class="list-group-item">
+        Email : @Model.Email
+    </li>
+</ul>
+
+<h2>Vozila</h2>
+<hr/>
+<ul class="list-group list">
+    @foreach (var vozilo in @Model.Vozila)
+    {
+        <li class="list-group-item">
+            Tip vozila : @vozilo.Tip<br/>
+            Registarska oznaka : @vozilo.RegOznaka<br/>
+            Godina proizvodnje : @vozilo.GodProizv
+        </li>
+    }
+</ul>
 
