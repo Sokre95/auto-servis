@@ -10,7 +10,7 @@ namespace AutoServis.Models
     {
         [Required(ErrorMessage = "Unesite godinu proizvodnje vozila.")]
         [Display(Name = "Godina proizvodnje")]
-        public DateTime GodProizv { get; set; }
+        public string GodProizv { get; set; }
         
         [Required(ErrorMessage = "unesite registarsku oznaku vozila.")]
         [Display(Name = "Registarska oznaka")]
@@ -19,6 +19,6 @@ namespace AutoServis.Models
         public ICollection<TipVozila> TipoviVozila { get; set; }
 
         [Display(Name = "Tip vozila")]
-        public int IdTipVozila { get; set; }
+        public int TipVozilaId { get; set; }
     }
 }

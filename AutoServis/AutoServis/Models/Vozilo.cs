@@ -11,7 +11,7 @@ namespace AutoServis.Models
     {
         public int Id { get; set; }
 
-        public DateTime GodProizv { get; set; }
+        public string GodProizv { get; set; }
 
         [StringLength(10)]
         public string RegOznaka { get; set; }

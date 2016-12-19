@@ -132,14 +132,14 @@ namespace AutoServis.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            //var tipoviVozila = _context.TipoviVozila.ToList();
+            var tipoviVozila = _context.TipoviVozila.ToList();
 
-            //var viewModel = new KorisnikViewModel
-            //{
-            //    TipoviVozila = tipoviVozila
-            //};
+            var viewModel = new KorisnikViewModel
+            {
+                TipoviVozila = tipoviVozila
+            };
 
-            return View();
+            return View(viewModel);
         }
         
         [HttpPost]
@@ -160,27 +160,41 @@ namespace AutoServis.Controllers
 
                 var result = await UserManager.CreateAsync(user, model.Password);
 
+                var vozilo = new Vozilo
+                {
+                    GodProizv = model.GodProizv,
+                    RegOznaka = model.RegOznaka,
+                    TipVozilaId = model.TipVozilaId,
+                    KorisnikId = user.Id
+                };
+
+                _context.Vozila.Add(vozilo);
+                await _context.SaveChangesAsync();
+
                 if (result.Succeeded)
                 {
                     // Kod za dodavanje korisnika sa admin ovlastima u bazu
+
                     //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                     //var roleManager = new RoleManager<IdentityRole>(roleStore);
                     //await roleManager.CreateAsync(new IdentityRole("Admin"));
                     //await UserManager.AddToRoleAsync(user.Id, "Admin");
 
                     // Kod za dodavanje korisnika sa serviser ovlastima u bazu
-                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                    var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    await roleManager.CreateAsync(new IdentityRole("Serviser"));
-                    await UserManager.AddToRoleAsync(user.Id, "Serviser");
 
-                    // Kod za dodavanje korisnika sa serviser ovlastima u bazu
                     //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                     //var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    //await roleManager.CreateAsync(new IdentityRole("Korisnik"));
-                    //await UserManager.AddToRoleAsync(user.Id, "Korisnik");
+                    //await roleManager.CreateAsync(new IdentityRole("Serviser"));
+                    //await UserManager.AddToRoleAsync(user.Id, "Serviser");
 
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    // Kod za dodavanje korisnika sa serviser ovlastima u bazu
+
+                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    await roleManager.CreateAsync(new IdentityRole("Korisnik"));
+                    await UserManager.AddToRoleAsync(user.Id, "Korisnik");
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

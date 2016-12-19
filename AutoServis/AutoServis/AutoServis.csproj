@@ -188,6 +188,10 @@
     <Compile Include="Migrations\201612191624400_SeedBaze2.Designer.cs">
       <DependentUpon>201612191624400_SeedBaze2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612191637402_GodProizvodnjeString.cs" />
+    <Compile Include="Migrations\201612191637402_GodProizvodnjeString.Designer.cs">
+      <DependentUpon>201612191637402_GodProizvodnjeString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -292,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612191624400_SeedBaze2.resx">
       <DependentUpon>201612191624400_SeedBaze2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612191637402_GodProizvodnjeString.resx">
+      <DependentUpon>201612191637402_GodProizvodnjeString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
