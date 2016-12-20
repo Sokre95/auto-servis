@@ -7,13 +7,13 @@ namespace AutoServis.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class SeedBaze : IMigrationMetadata
+    public sealed partial class PopunjavanjeBaze : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedBaze));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PopunjavanjeBaze));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612191558037_SeedBaze"; }
+            get { return "201612201411469_PopunjavanjeBaze"; }
         }
         
         string IMigrationMetadata.Source

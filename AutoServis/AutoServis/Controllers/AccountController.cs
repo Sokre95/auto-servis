@@ -156,7 +156,7 @@ namespace AutoServis.Controllers
                     Email = model.Email,
                     Ime = model.Ime,
                     Prezime = model.Prezime,
-                    BrojTel = model.BrojTel
+                    PhoneNumber = model.BrojTel
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);

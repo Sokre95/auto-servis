@@ -180,17 +180,17 @@
     <Compile Include="Migrations\201612191521171_Model.Designer.cs">
       <DependentUpon>201612191521171_Model.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612191558037_SeedBaze.cs" />
-    <Compile Include="Migrations\201612191558037_SeedBaze.Designer.cs">
-      <DependentUpon>201612191558037_SeedBaze.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612191624400_SeedBaze2.cs" />
-    <Compile Include="Migrations\201612191624400_SeedBaze2.Designer.cs">
-      <DependentUpon>201612191624400_SeedBaze2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201612191637402_GodProizvodnjeString.cs" />
     <Compile Include="Migrations\201612191637402_GodProizvodnjeString.Designer.cs">
       <DependentUpon>201612191637402_GodProizvodnjeString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612201407211_MaknutBrojTelefonaViska.cs" />
+    <Compile Include="Migrations\201612201407211_MaknutBrojTelefonaViska.Designer.cs">
+      <DependentUpon>201612201407211_MaknutBrojTelefonaViska.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612201411469_PopunjavanjeBaze.cs" />
+    <Compile Include="Migrations\201612201411469_PopunjavanjeBaze.Designer.cs">
+      <DependentUpon>201612201411469_PopunjavanjeBaze.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -299,14 +299,14 @@
     <EmbeddedResource Include="Migrations\201612191521171_Model.resx">
       <DependentUpon>201612191521171_Model.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612191558037_SeedBaze.resx">
-      <DependentUpon>201612191558037_SeedBaze.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612191624400_SeedBaze2.resx">
-      <DependentUpon>201612191624400_SeedBaze2.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612191637402_GodProizvodnjeString.resx">
       <DependentUpon>201612191637402_GodProizvodnjeString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612201407211_MaknutBrojTelefonaViska.resx">
+      <DependentUpon>201612201407211_MaknutBrojTelefonaViska.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612201411469_PopunjavanjeBaze.resx">
+      <DependentUpon>201612201411469_PopunjavanjeBaze.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

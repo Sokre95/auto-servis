@@ -66,7 +66,7 @@ namespace AutoServis.Controllers
 					Email = model.Email,
 					Ime = model.Ime,
 					Prezime = model.Prezime,
-					BrojTel = model.BrojTel
+					PhoneNumber = model.BrojTel
 				};
 
 				var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -93,7 +93,7 @@ namespace AutoServis.Controllers
                 Email = serviser.Email,
                 Ime = serviser.Ime,
                 Prezime = serviser.Prezime,
-                BrojTel = serviser.BrojTel
+                BrojTel = serviser.PhoneNumber
 	        };
 
 	        return View(viewModel);

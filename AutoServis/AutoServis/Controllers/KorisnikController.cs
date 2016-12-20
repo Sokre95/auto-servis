@@ -47,7 +47,7 @@ namespace AutoServis.Controllers
             {
                 Ime = user.Ime,
                 Prezime = user.Prezime,
-                BrojTel = user.BrojTel,
+                BrojTel = user.PhoneNumber,
                 Email = user.Email,
                 Vozila = vozila
             };
