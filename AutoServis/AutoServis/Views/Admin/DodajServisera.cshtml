@@ -1,4 +1,4 @@
-﻿@model AutoServis.Models.ServiserViewModel
+﻿@model AutoServis.ViewModels.ServiserViewModel
 
 @{
     ViewBag.Title = "DodajServisera";
@@ -10,49 +10,7 @@
 @using (Html.BeginForm("DodajServisera", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
 	@Html.AntiForgeryToken()
-	<hr />
-	<div class="form-group">
-		@Html.LabelFor(m => m.Ime, new { @class = "col-md-2 control-label" })
-		<div class="col-md-10">
-			@Html.TextBoxFor(m => m.Ime, new { @class = "form-control" })
-			@Html.ValidationMessageFor(m => m.Ime)
-		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(m => m.Prezime, new { @class = "col-md-2 control-label" })
-		<div class="col-md-10">
-			@Html.TextBoxFor(m => m.Prezime, new { @class = "form-control" })
-			@Html.ValidationMessageFor(m => m.Prezime)
-		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(m => m.BrTel, new { @class = "col-md-2 control-label" })
-		<div class="col-md-10">
-			@Html.TextBoxFor(m => m.BrTel, new { @class = "form-control" })
-			@Html.ValidationMessageFor(m => m.BrTel)
-		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-		<div class="col-md-10">
-			@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-			@Html.ValidationMessageFor(m => m.Email)
-		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-		<div class="col-md-10">
-			@Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-			@Html.ValidationMessageFor(m => m.Password)
-		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-		<div class="col-md-10">
-			@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-			@Html.ValidationMessageFor(m => m.ConfirmPassword)
-		</div>
-	</div>
+    @Html.Partial("_ServiserForm")
 	<div class="form-group">
 		<div class="col-md-offset-2 col-md-10">
 			<input type="submit" class="btn btn-primary" value="Dodaj servisera" />

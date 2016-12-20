@@ -20,7 +20,12 @@ namespace AutoServis.Controllers
             _context = new ApplicationDbContext();    
         }
 
-        public ActionResult Index()
+	    protected override void Dispose(bool disposing)
+	    {
+            _context.Dispose();
+	    }
+
+	    public ActionResult Index()
         {
             Korisnik user = (Korisnik)System.Web.HttpContext.Current.GetOwinContext()
                     .GetUserManager<ApplicationUserManager>()

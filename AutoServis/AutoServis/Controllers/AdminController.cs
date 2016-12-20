@@ -21,18 +21,40 @@ namespace AutoServis.Controllers
 		{
 			_context = new ApplicationDbContext();
 		}
-		
-        public ActionResult Index()
+
+	    protected override void Dispose(bool disposing)
+	    {
+            _context.Dispose();
+	    }
+
+	    public ActionResult Index()
         {
             return View();
         }
-		
-		public ActionResult DodajServisera()
-		{
-			return View();
-		}
 
-		[HttpPost]
+	    public ActionResult Serviseri()
+	    {
+            var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+	        var roleId = roleManager.FindByName("Serviser").Id;
+
+            // Dohvati servisere iz baze po ulozi servisera
+            var serviseri = _context.Users.Where(x => x.Roles.Any(role => role.RoleId == roleId)).ToList().Cast<Serviser>().ToList();
+
+            return View(serviseri);
+	    }
+
+	    public ActionResult Korisnici()
+	    {
+	        return View();
+	    }
+
+        public ActionResult DodajServisera()
+        {
+            return View();
+        }
+
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> DodajServisera(ServiserViewModel model)
 		{
@@ -55,12 +77,27 @@ namespace AutoServis.Controllers
 				{
 					await userManager.AddToRoleAsync(user.Id, "Serviser");
 
-					return RedirectToAction("Index");
+					return RedirectToAction("Serviseri");
 				}
 			}
 
 			return View(model);
 		}
+
+	    public ActionResult IzmjeniServisera(string Id)
+	    {
+	        var serviser = (Serviser)_context.Users.FirstOrDefault(x => x.Id == Id);
+
+	        var viewModel = new ServiserViewModel
+	        {
+                Email = serviser.Email,
+                Ime = serviser.Ime,
+                Prezime = serviser.Prezime,
+                BrojTel = serviser.BrojTel
+	        };
+
+	        return View(viewModel);
+	    }
 
 		public ActionResult KontaktServisa()
 		{
