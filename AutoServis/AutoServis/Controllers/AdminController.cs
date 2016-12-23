@@ -39,9 +39,25 @@ namespace AutoServis.Controllers
 	        var roleId = roleManager.FindByName("Serviser").Id;
 
             // Dohvati servisere iz baze po ulozi servisera
-            var serviseri = _context.Users.Where(x => x.Roles.Any(role => role.RoleId == roleId)).ToList().Cast<Serviser>().ToList();
+            var serviseri = _context.Users
+                .Where(x => x.Roles.Any(role => role.RoleId == roleId))
+                .ToList().Cast<Serviser>().ToList();
 
-            return View(serviseri);
+            var listaServisera = new List<KorisniciZaAdminaViewModel>();
+
+            foreach(var serviser in serviseri)
+            {
+                listaServisera.Add(new KorisniciZaAdminaViewModel
+                {
+                    Id = serviser.Id,
+                    Ime = serviser.Ime,
+                    Prezime = serviser.Prezime,
+                    BrojTel = serviser.PhoneNumber,
+                    Email = serviser.Email
+                });
+            }
+
+            return View(listaServisera);
 	    }
 
 	    public ActionResult Korisnici()
@@ -60,7 +76,7 @@ namespace AutoServis.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var user = new ApplicationUser
+				var user = new Serviser
 				{
 					UserName = model.Email,
 					Email = model.Email,
@@ -84,9 +100,35 @@ namespace AutoServis.Controllers
 			return View(model);
 		}
 
-	    public ActionResult IzmjeniServisera(string Id)
+        public ActionResult Izmjeni(string Id)
+        {
+            var korisnik = _context.Users.FirstOrDefault(u => u.Id == Id);
+            var uloge = korisnik.Roles;
+            foreach(var uloga in uloge)
+            {
+                var imeUloge = _context.Roles.FirstOrDefault(r => r.Id == uloga.RoleId).Name;
+
+                if (imeUloge.Equals("Serviser"))
+                {
+                    return RedirectToAction("IzmjeniServisera", (Serviser)korisnik);
+                }
+                else if (imeUloge.Equals("Korisnik"))
+                {
+                    return RedirectToAction("IzmjeniKorisnika", (Korisnik)korisnik);
+                }
+            }
+
+            return RedirectToAction("Serviseri");
+        }
+
+        public void IzmjeniKorisnika(Korisnik korisnik)
+        {
+
+        }
+
+	    public ActionResult IzmjeniServisera(Serviser serviser)
 	    {
-	        var serviser = (Serviser)_context.Users.FirstOrDefault(x => x.Id == Id);
+	        //var serviser = (Serviser)_context.Users.FirstOrDefault(u => u.Id == Id);
 
 	        var viewModel = new ServiserViewModel
 	        {
@@ -132,5 +174,51 @@ namespace AutoServis.Controllers
 		{
 			return HttpNotFound();
 		}
+
+        [HttpPost]
+        public ActionResult Izbrisi(string Id)
+        {
+            var userInDb = _context.Users.FirstOrDefault(u => u.Id == Id);
+
+            try
+            {
+                _context.Users.Remove(userInDb);
+                _context.SaveChanges();
+            }
+            catch(Exception)
+            {
+                return Json(new { success = false });
+            }
+
+            return Json(new { success = true });
+        }
+
+        public ActionResult Osvjezi()
+        {
+            var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+            var roleId = roleManager.FindByName("Serviser").Id;
+
+            // Dohvati servisere iz baze po ulozi servisera
+            var serviseri = _context.Users
+                .Where(x => x.Roles.Any(role => role.RoleId == roleId))
+                .ToList().Cast<Serviser>().ToList();
+
+            var listaServisera = new List<KorisniciZaAdminaViewModel>();
+
+            foreach (var serviser in serviseri)
+            {
+                listaServisera.Add(new KorisniciZaAdminaViewModel
+                {
+                    Id = serviser.Id,
+                    Ime = serviser.Ime,
+                    Prezime = serviser.Prezime,
+                    BrojTel = serviser.PhoneNumber,
+                    Email = serviser.Email
+                });
+            }
+
+            return PartialView("_Korisnici", listaServisera);
+        }
 	}
 }

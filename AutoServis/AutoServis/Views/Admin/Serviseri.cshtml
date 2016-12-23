@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AutoServis.Models.Serviser>
+﻿@model IEnumerable<AutoServis.ViewModels.KorisniciZaAdminaViewModel>
 
 @{
     ViewBag.Title = "Serviseri";
@@ -8,28 +8,14 @@
 <h2>Serviseri</h2>
 <hr/>
 <div class="form-group">
-    <div class="btn btn-primary">@Html.ActionLink("Dodaj servisera", "DodajServisera", "Admin")</div>
+    <div class="btn btn-default">@Html.ActionLink("Dodaj servisera", "DodajServisera", "Admin")</div>
 </div>
 
-<table id="serviseri" class="table table-bordered table-hover table-striped">
-    <thead>
-        <tr>
-            <th>Ime i prezime</th>
-            <th>Broj telefona</th>
-            <th>EMail</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var serviser in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(serviser.Ime + " " + serviser.Prezime, "IzmjeniServisera", "Admin", new { id = serviser.Id }, null)</td>
-                <td>@serviser.BrojTel</td>
-                <td>@serviser.Email</td>
-                <td><button data-serviser-id="@serviser.Id" class="btn btn-link">Izbrisi</button></td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div id ="modul-korisnici">
+    @Html.Partial("_Korisnici")
+</div>
 
+@section Scripts 
+{
+    <script src="~/Scripts/admin.js"></script>        
+}
