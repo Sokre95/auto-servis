@@ -34,35 +34,12 @@ namespace AutoServis.Controllers
 
 	    public ActionResult Serviseri()
 	    {
-            var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-            var roleManager = new RoleManager<IdentityRole>(roleStore);
-	        var roleId = roleManager.FindByName("Serviser").Id;
-
-            // Dohvati servisere iz baze po ulozi servisera
-            var serviseri = _context.Users
-                .Where(x => x.Roles.Any(role => role.RoleId == roleId))
-                .ToList().Cast<Serviser>().ToList();
-
-            var listaServisera = new List<KorisniciZaAdminaViewModel>();
-
-            foreach(var serviser in serviseri)
-            {
-                listaServisera.Add(new KorisniciZaAdminaViewModel
-                {
-                    Id = serviser.Id,
-                    Ime = serviser.Ime,
-                    Prezime = serviser.Prezime,
-                    BrojTel = serviser.PhoneNumber,
-                    Email = serviser.Email
-                });
-            }
-
-            return View(listaServisera);
+            return View(DohvatiKorisnikePoUlozi("serviser"));
 	    }
 
 	    public ActionResult Korisnici()
 	    {
-	        return View();
+	        return View(DohvatiKorisnikePoUlozi("Korisnik"));
 	    }
 
         public ActionResult DodajServisera()
@@ -100,10 +77,65 @@ namespace AutoServis.Controllers
 			return View(model);
 		}
 
+        public ActionResult DodajKorisnika()
+        {
+            var tipoviVozila = _context.TipoviVozila.ToList();
+
+            var viewModel = new KorisnikViewModel
+            {
+                TipoviVozila = tipoviVozila
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DodajKorisnika(KorisnikViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new Korisnik
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Ime = model.Ime,
+                    Prezime = model.Prezime,
+                    PhoneNumber = model.BrojTel
+                };
+
+                var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+                var result = await userManager.CreateAsync(user, model.Password);
+
+                var vozilo = new Vozilo
+                {
+                    GodProizv = model.GodProizv,
+                    RegOznaka = model.RegOznaka,
+                    TipVozilaId = model.TipVozilaId,
+                    KorisnikId = user.Id
+                };
+
+                _context.Vozila.Add(vozilo);
+                await _context.SaveChangesAsync();
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user.Id, "Korisnik");
+
+                    return RedirectToAction("Korisnici");
+                }
+            }
+
+            return View(model);
+        }
+
         public ActionResult Izmjeni(string Id)
         {
             var korisnik = _context.Users.FirstOrDefault(u => u.Id == Id);
+
             var uloge = korisnik.Roles;
+
             foreach(var uloga in uloge)
             {
                 var imeUloge = _context.Roles.FirstOrDefault(r => r.Id == uloga.RoleId).Name;
@@ -128,8 +160,6 @@ namespace AutoServis.Controllers
 
 	    public ActionResult IzmjeniServisera(Serviser serviser)
 	    {
-	        //var serviser = (Serviser)_context.Users.FirstOrDefault(u => u.Id == Id);
-
 	        var viewModel = new ServiserViewModel
 	        {
                 Email = serviser.Email,
@@ -170,11 +200,6 @@ namespace AutoServis.Controllers
 		    return View(model);
 		}
 
-		public ActionResult DodajKorisnika()
-		{
-			return HttpNotFound();
-		}
-
         [HttpPost]
         public ActionResult Izbrisi(string Id)
         {
@@ -193,32 +218,50 @@ namespace AutoServis.Controllers
             return Json(new { success = true });
         }
 
-        public ActionResult Osvjezi()
+        public ActionResult OsvjeziServisere()
+        {
+            return PartialView("_Korisnici", DohvatiKorisnikePoUlozi("Serviser"));
+        }
+
+        public ActionResult OsvjeziKorisnike()
+        {
+            return PartialView("_Korisnici", DohvatiKorisnikePoUlozi("Korisnik"));
+        }
+
+        private IEnumerable<KorisniciZaAdminaViewModel> DohvatiKorisnikePoUlozi(string uloga)
         {
             var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
             var roleManager = new RoleManager<IdentityRole>(roleStore);
-            var roleId = roleManager.FindByName("Serviser").Id;
+            var roleId = roleManager.FindByName(uloga).Id;
 
-            // Dohvati servisere iz baze po ulozi servisera
-            var serviseri = _context.Users
-                .Where(x => x.Roles.Any(role => role.RoleId == roleId))
-                .ToList().Cast<Serviser>().ToList();
+            IEnumerable<ApplicationUser> korisnici = _context.Users
+                        .Where(u => u.Roles.Any(r => r.RoleId == roleId))
+                        .ToList();
 
-            var listaServisera = new List<KorisniciZaAdminaViewModel>();
+            //if(uloga.Equals("Korisnik"))
+            //{
+            //    korisnici = korisnici.Cast<Korisnik>().ToList();
+            //}
+            //else if(uloga.Equals("Korisnik"))
+            //{
+            //    korisnici = korisnici.Cast<Serviser>().ToList();
+            //}
 
-            foreach (var serviser in serviseri)
+            var listaKorisnika = new List<KorisniciZaAdminaViewModel>();
+
+            foreach (var korisnik in korisnici)
             {
-                listaServisera.Add(new KorisniciZaAdminaViewModel
+                listaKorisnika.Add(new KorisniciZaAdminaViewModel
                 {
-                    Id = serviser.Id,
-                    Ime = serviser.Ime,
-                    Prezime = serviser.Prezime,
-                    BrojTel = serviser.PhoneNumber,
-                    Email = serviser.Email
+                    Id = korisnik.Id,
+                    Ime = korisnik.Ime,
+                    Prezime = korisnik.Prezime,
+                    BrojTel = korisnik.PhoneNumber,
+                    Email = korisnik.Email
                 });
             }
 
-            return PartialView("_Korisnici", listaServisera);
+            return listaKorisnika;
         }
 	}
 }

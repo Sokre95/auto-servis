@@ -16,7 +16,7 @@
                 <td>@Html.ActionLink(korisnik.Ime + " " + korisnik.Prezime, "Izmjeni", "Admin", new { id = korisnik.Id }, null)</td>
                 <td>@korisnik.BrojTel</td>
                 <td>@korisnik.Email</td>
-                <td><button data-serviser-id="@korisnik.Id" class="btn btn-link del">Izbrisi</button></td>
+                <td><button data-korisnik-id="@korisnik.Id" class="btn btn-link del">Izbrisi</button></td>
             </tr>
         }
     </tbody>

@@ -3,7 +3,7 @@
     $(".del").click(Delete);
 });
 
-function Delete() {
+function Delete(uloga) {
     var serviserId = $(this).data("serviser-id");
     var url = "/Admin/Izbrisi/" + serviserId;
     $.ajax({
@@ -11,17 +11,10 @@ function Delete() {
         url: url,
         success: function () {
             Refresh();
-            alert("Serviser uspješno izbrisan.")
+            alert("Brisanje " + uloga + " uspješno.")
         },
         error: function () {
-            alert("Nije moguce izbrisati servisera.")
+            alert("Neuspješno brisanje " + uloga)
         }
-    });
-}
-
-function Refresh() {
-    $("#modul-korisnici").load('/Admin/Osvjezi', function () {
-        $('#korisnici').DataTable();
-        $(".del").click(Delete);
     });
 }

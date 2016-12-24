@@ -17,5 +17,35 @@
 
 @section Scripts 
 {
-    <script src="~/Scripts/admin.js"></script>        
+    <script>
+        
+        $(document).ready(function () {
+            $("#korisnici").DataTable();
+            $(".del").click(Delete);
+        });
+
+        function Delete(uloga) {
+            var serviserId = $(this).data("korisnik-id");
+            var url = "/Admin/Izbrisi/" + serviserId;
+            $.ajax({
+                method: "POST",
+                url: url,
+                success: function () {
+                    Refresh();
+                    alert("Brisanje servisera uspješno.")
+                },
+                error: function () {
+                    alert("Neuspješno brisanje servisera")
+                }
+            });
+        }
+
+        function Refresh() {
+            $("#modul-korisnici").load('/Admin/OsvjeziServisere', function () {
+                $('#korisnici').DataTable();
+                $(".del").click(Delete);
+            });
+        }
+
+    </script>        
 }
