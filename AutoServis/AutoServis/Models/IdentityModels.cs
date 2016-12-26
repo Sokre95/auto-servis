@@ -53,8 +53,6 @@ namespace AutoServis.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            //modelBuilder.Entity<Kontakt>().ToTable("Kontakt");
-            //modelBuilder.Entity<TipVozila>().ToTable("TipVozila");
         }
     }
 }

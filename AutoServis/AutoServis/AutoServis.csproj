@@ -176,21 +176,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612191521171_Model.cs" />
-    <Compile Include="Migrations\201612191521171_Model.Designer.cs">
-      <DependentUpon>201612191521171_Model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612191637402_GodProizvodnjeString.cs" />
-    <Compile Include="Migrations\201612191637402_GodProizvodnjeString.Designer.cs">
-      <DependentUpon>201612191637402_GodProizvodnjeString.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612201407211_MaknutBrojTelefonaViska.cs" />
-    <Compile Include="Migrations\201612201407211_MaknutBrojTelefonaViska.Designer.cs">
-      <DependentUpon>201612201407211_MaknutBrojTelefonaViska.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612201411469_PopunjavanjeBaze.cs" />
-    <Compile Include="Migrations\201612201411469_PopunjavanjeBaze.Designer.cs">
-      <DependentUpon>201612201411469_PopunjavanjeBaze.cs</DependentUpon>
+    <Compile Include="Migrations\201612261507437_DBSchemaGenerate.cs" />
+    <Compile Include="Migrations\201612261507437_DBSchemaGenerate.Designer.cs">
+      <DependentUpon>201612261507437_DBSchemaGenerate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -521,17 +509,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612191521171_Model.resx">
-      <DependentUpon>201612191521171_Model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612191637402_GodProizvodnjeString.resx">
-      <DependentUpon>201612191637402_GodProizvodnjeString.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612201407211_MaknutBrojTelefonaViska.resx">
-      <DependentUpon>201612201407211_MaknutBrojTelefonaViska.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612201411469_PopunjavanjeBaze.resx">
-      <DependentUpon>201612201411469_PopunjavanjeBaze.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612261507437_DBSchemaGenerate.resx">
+      <DependentUpon>201612261507437_DBSchemaGenerate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

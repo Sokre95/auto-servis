@@ -24,6 +24,8 @@ namespace AutoServis.Models
 
         public int ZamjenskoVoziloId { get; set; }
 
+        public int UslugaId { get; set; }
+
         // Reference...
         public virtual Korisnik Korisnik { get; set; }
 
@@ -33,6 +35,6 @@ namespace AutoServis.Models
         
         public virtual ZamjenskoVozilo ZamjenskoVozilo { get; set; }
 
-        public virtual ICollection<Usluga> Usluge { get; set; }
+        public virtual Usluga Usluga { get; set; }
     }
 }

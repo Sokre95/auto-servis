@@ -7,13 +7,13 @@ namespace AutoServis.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class GodProizvodnjeString : IMigrationMetadata
+    public sealed partial class DBSchemaGenerate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(GodProizvodnjeString));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DBSchemaGenerate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612191637402_GodProizvodnjeString"; }
+            get { return "201612261507437_DBSchemaGenerate"; }
         }
         
         string IMigrationMetadata.Source

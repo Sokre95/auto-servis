@@ -205,15 +205,8 @@ namespace AutoServis.Controllers
         {
             var userInDb = _context.Users.FirstOrDefault(u => u.Id == Id);
 
-            try
-            {
-                _context.Users.Remove(userInDb);
-                _context.SaveChanges();
-            }
-            catch(Exception)
-            {
-                return Json(new { success = false });
-            }
+            _context.Users.Remove(userInDb);
+            _context.SaveChanges();
 
             return Json(new { success = true });
         }
@@ -237,15 +230,6 @@ namespace AutoServis.Controllers
             IEnumerable<ApplicationUser> korisnici = _context.Users
                         .Where(u => u.Roles.Any(r => r.RoleId == roleId))
                         .ToList();
-
-            //if(uloga.Equals("Korisnik"))
-            //{
-            //    korisnici = korisnici.Cast<Korisnik>().ToList();
-            //}
-            //else if(uloga.Equals("Korisnik"))
-            //{
-            //    korisnici = korisnici.Cast<Serviser>().ToList();
-            //}
 
             var listaKorisnika = new List<KorisniciZaAdminaViewModel>();
 

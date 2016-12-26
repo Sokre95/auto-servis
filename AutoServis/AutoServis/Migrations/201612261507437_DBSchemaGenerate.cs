@@ -3,7 +3,7 @@ namespace AutoServis.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Model : DbMigration
+    public partial class DBSchemaGenerate : DbMigration
     {
         public override void Up()
         {
@@ -31,16 +31,19 @@ namespace AutoServis.Migrations
                         VoziloId = c.Int(nullable: false),
                         ServiserId = c.Int(nullable: false),
                         ZamjenskoVoziloId = c.Int(nullable: false),
+                        UslugaId = c.Int(nullable: false),
                         Korisnik_Id = c.String(maxLength: 128),
                         Serviser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.Korisnik_Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.Serviser_Id)
-                .ForeignKey("dbo.Vozilo", t => t.VoziloId, cascadeDelete: true)
+                .ForeignKey("dbo.Korisnik", t => t.Korisnik_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Vozilo", t => t.VoziloId)
+                .ForeignKey("dbo.Serviser", t => t.Serviser_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Usluga", t => t.UslugaId, cascadeDelete: true)
                 .ForeignKey("dbo.ZamjenskoVozilo", t => t.ZamjenskoVoziloId, cascadeDelete: true)
                 .Index(t => t.VoziloId)
                 .Index(t => t.ZamjenskoVoziloId)
+                .Index(t => t.UslugaId)
                 .Index(t => t.Korisnik_Id)
                 .Index(t => t.Serviser_Id);
             
@@ -51,7 +54,6 @@ namespace AutoServis.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         Ime = c.String(),
                         Prezime = c.String(),
-                        BrojTel = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -63,7 +65,6 @@ namespace AutoServis.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
@@ -101,8 +102,8 @@ namespace AutoServis.Migrations
                         RoleId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
             
@@ -111,13 +112,13 @@ namespace AutoServis.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        GodProizv = c.DateTime(nullable: false),
+                        GodProizv = c.String(),
                         RegOznaka = c.String(maxLength: 10),
                         KorisnikId = c.String(maxLength: 128),
                         TipVozilaId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.KorisnikId)
+                .ForeignKey("dbo.Korisnik", t => t.KorisnikId, cascadeDelete: true)
                 .ForeignKey("dbo.TipVozila", t => t.TipVozilaId, cascadeDelete: true)
                 .Index(t => t.KorisnikId)
                 .Index(t => t.TipVozilaId);
@@ -161,36 +162,44 @@ namespace AutoServis.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
-                "dbo.UslugaPopravak",
+                "dbo.Korisnik",
                 c => new
                     {
-                        Usluga_Id = c.Int(nullable: false),
-                        Popravak_Id = c.Int(nullable: false),
+                        Id = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.Usluga_Id, t.Popravak_Id })
-                .ForeignKey("dbo.Usluga", t => t.Usluga_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Popravak", t => t.Popravak_Id, cascadeDelete: true)
-                .Index(t => t.Usluga_Id)
-                .Index(t => t.Popravak_Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.Id, cascadeDelete: true)
+                .Index(t => t.Id);
+            
+            CreateTable(
+                "dbo.Serviser",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.Id)
+                .Index(t => t.Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Popravak", "ZamjenskoVoziloId", "dbo.ZamjenskoVozilo");
-            DropForeignKey("dbo.UslugaPopravak", "Popravak_Id", "dbo.Popravak");
-            DropForeignKey("dbo.UslugaPopravak", "Usluga_Id", "dbo.Usluga");
-            DropForeignKey("dbo.Vozilo", "TipVozilaId", "dbo.TipVozila");
-            DropForeignKey("dbo.Popravak", "VoziloId", "dbo.Vozilo");
-            DropForeignKey("dbo.Vozilo", "KorisnikId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Popravak", "Serviser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Serviser", "Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Korisnik", "Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Popravak", "Korisnik_Id", "dbo.AspNetUsers");
-            DropIndex("dbo.UslugaPopravak", new[] { "Popravak_Id" });
-            DropIndex("dbo.UslugaPopravak", new[] { "Usluga_Id" });
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Popravak", "ZamjenskoVoziloId", "dbo.ZamjenskoVozilo");
+            DropForeignKey("dbo.Popravak", "UslugaId", "dbo.Usluga");
+            DropForeignKey("dbo.Popravak", "Serviser_Id", "dbo.Serviser");
+            DropForeignKey("dbo.Vozilo", "TipVozilaId", "dbo.TipVozila");
+            DropForeignKey("dbo.Popravak", "VoziloId", "dbo.Vozilo");
+            DropForeignKey("dbo.Vozilo", "KorisnikId", "dbo.Korisnik");
+            DropForeignKey("dbo.Popravak", "Korisnik_Id", "dbo.Korisnik");
+            DropIndex("dbo.Serviser", new[] { "Id" });
+            DropIndex("dbo.Korisnik", new[] { "Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Vozilo", new[] { "TipVozilaId" });
             DropIndex("dbo.Vozilo", new[] { "KorisnikId" });
@@ -201,9 +210,11 @@ namespace AutoServis.Migrations
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Popravak", new[] { "Serviser_Id" });
             DropIndex("dbo.Popravak", new[] { "Korisnik_Id" });
+            DropIndex("dbo.Popravak", new[] { "UslugaId" });
             DropIndex("dbo.Popravak", new[] { "ZamjenskoVoziloId" });
             DropIndex("dbo.Popravak", new[] { "VoziloId" });
-            DropTable("dbo.UslugaPopravak");
+            DropTable("dbo.Serviser");
+            DropTable("dbo.Korisnik");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.ZamjenskoVozilo");
             DropTable("dbo.Usluga");

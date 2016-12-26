@@ -22,7 +22,7 @@ namespace AutoServis.Models
         public int TipVozilaId { get; set; }
 
         // Navigacija...
-        public virtual ApplicationUser Korisnik { get; set; }
+        public virtual Korisnik Korisnik { get; set; }
 
         public virtual TipVozila TipVozila { get; set; }
 
