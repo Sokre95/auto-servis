@@ -10,28 +10,35 @@
 
 <ul class="list-group list">
     <li class="list-group-item">
-        Ime : @Model.Ime
+        Ime: @Model.Ime
     </li>
     <li class="list-group-item">
-        Prezime : @Model.Prezime
+        Prezime: @Model.Prezime
     </li>
     <li class="list-group-item">
-        Broj telefona : @Model.BrojTel
+        Broj telefona: @Model.BrojTel
     </li>
     <li class="list-group-item">
-        Email : @Model.Email
+        Email: @Model.Email
     </li>
 </ul>
-
-<h2>Vozila</h2>
-<hr/>
-<ul class="list-group list">
-    @foreach (var vozilo in @Model.Vozila)
-    {
-        <li class="list-group-item">
-            Tip vozila : @vozilo.Tip<br/>
-            Registarska oznaka : @vozilo.RegOznaka<br/>
-            Godina proizvodnje : @vozilo.GodProizv
-        </li>
-    }
-</ul>
+<div class="container">
+    <div class="col-md-6">
+        <h2>Vozila</h2>
+        <hr/>
+        <ul class="list-group list">
+            @foreach (var vozilo in Model.Vozila)
+            {
+                <li class="list-group-item">
+                    Tip vozila: @vozilo.Tip<br/>
+                    Registarska oznaka: @vozilo.RegOznaka<br/>
+                    Godina proizvodnje: @vozilo.GodProizv
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>Popravci</h2>
+        <hr/>
+    </div>
+</div>

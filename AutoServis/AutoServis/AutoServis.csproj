@@ -183,6 +183,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ViewModels\RepairViewModel.cs" />
     <Compile Include="ViewModels\DodajVoziloViewModel.cs" />
     <Compile Include="ViewModels\IndexKorisnikViewModel.cs" />
     <Compile Include="Models\Kontakt.cs" />
@@ -496,6 +497,7 @@
     <Content Include="Views\Admin\_ServiserForm.cshtml" />
     <Content Include="Views\Admin\_Korisnici.cshtml" />
     <Content Include="Views\Admin\DodajKorisnika.cshtml" />
+    <Content Include="Views\Korisnik\Repair.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

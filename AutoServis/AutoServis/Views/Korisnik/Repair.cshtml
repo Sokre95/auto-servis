@@ -1,0 +1,56 @@
+﻿@using System.Web.UI.WebControls
+@using WebGrease.Css.Extensions
+@model AutoServis.ViewModels.RepairViewModel
+
+@{
+    ViewBag.Title = "Repair";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Prijava vozila na popravak</h2>
+<hr/>
+
+@using (Html.BeginForm("Repair", "Korisnik", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => m.odabranoVozilo, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.odabranoVozilo, new SelectList(Model.vozila, "Id", "RegOznaka"), "Odaberite vozilo", new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.odabranoVozilo)
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-md-offset-2 col-md-10">Ukoliko ne odaberete servisera sustav će vam ga dodjeliti</p>
+            @Html.LabelFor(m => m.odabraniServiser, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.odabraniServiser, new SelectList(Model.serviseri, "Id", "Prezime"), "Odaberite servisera", new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.odabraniServiser)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <p class="col-md-offset-2 col-md-10">Odaberite jedan od dostupnih termina u slijedecih 10 dana</p>
+            @Html.LabelFor(m => m.odabraniTermin, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.odabraniTermin, Model.dostupniTermini, "Odaberi termin", new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.odabraniServiser)
+            </div>
+        </div>
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

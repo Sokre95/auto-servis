@@ -12,8 +12,9 @@
 			<ul class="nav navbar-nav">
 				@if (User.IsInRole("Korisnik"))
 				{
-					<li>@Html.ActionLink("Početna stranica", "Index", "Korisnik")</li>
-					<li>@Html.ActionLink("Dodaj vozilo", "Add", "Korisnik")</li>
+					<li>@Html.ActionLink("Moji podaci", "Index", "Korisnik")</li>
+				    <li>@Html.ActionLink("Dodaj vozilo", "Add", "Korisnik")</li>
+                    <li>@Html.ActionLink("Zatraži popravak", "Repair", "Korisnik")</li>
 				}
 				@if (User.IsInRole("Serviser"))
 				{
