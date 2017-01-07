@@ -1,15 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace AutoServis.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-	
     public class Popravak
     {
         public int Id { get; set; }
-        
+
         public DateTime DatumVrijeme { get; set; }
 
         [StringLength(500)]
@@ -24,17 +22,15 @@ namespace AutoServis.Models
 
         public int ZamjenskoVoziloId { get; set; }
 
-        public int UslugaId { get; set; }
-
         // Reference...
         public virtual Korisnik Korisnik { get; set; }
 
         public virtual Vozilo Vozilo { get; set; }
 
         public virtual Serviser Serviser { get; set; }
-        
+
         public virtual ZamjenskoVozilo ZamjenskoVozilo { get; set; }
 
-        public virtual Usluga Usluga { get; set; }
+        public virtual ICollection<Usluga> Usluge { get; set; }
     }
 }
