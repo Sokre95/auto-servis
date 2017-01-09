@@ -39,7 +39,7 @@
     </div>
     <div class="col-md-6">
         <h2>Popravci</h2>
-        <hr />
+        <hr/>
         <ul class="list-group list">
             @foreach (var popravak in Model.Popravci)
             {
@@ -48,7 +48,7 @@
                     Serviser: @popravak.Serviser<br/>
                     Usluge:
                     <ul class="list-group list">
-                        @foreach (var usluga in @popravak.Usluge)
+                        @foreach (var usluga in popravak.Usluge)
                         {
                             <li class="list-group-item">@usluga</li>
                         }

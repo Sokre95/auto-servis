@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Runtime.InteropServices;
 using AutoServis.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -70,7 +68,7 @@ namespace AutoServis.Migrations
                 Naziv = "Zafira"
             });
             // usluge
-            Usluga[] usluge = new Usluga[]
+            Usluga[] usluge =
             {
                 new Usluga {Id = 1, Opis = "Izmjena ulja motora"},
                 new Usluga {Id = 2, Opis = "Ugradnja kocionih plocica"},

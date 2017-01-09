@@ -24,10 +24,10 @@
             @Html.LabelFor(m => m.OdabraneUsluge, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
                 <ul class="list-group checked-list-box col-md-4">
-                    @for (int i = 0; i < Model.Usluge.Count(); i++)
+                    @for (var i = 0; i < Model.Usluge.Count(); i++)
                     {
                         <li class="list-group-item">
-                            @Html.CheckBox("OdabraneUsluge", new {@value = @Model.Usluge.ElementAt(i).Id})
+                            @Html.CheckBox("OdabraneUsluge", new {value = Model.Usluge.ElementAt(i).Id})
                             @Model.Usluge.ElementAt(i).Opis
                         </li>
                     }

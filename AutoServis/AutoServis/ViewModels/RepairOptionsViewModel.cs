@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
@@ -28,7 +28,7 @@ namespace AutoServis.ViewModels
         [StringLength(500)]
         [DisplayName("Dodatan opis")]
         public string DodatanOpis { get; set; }
-        
+
         public string OdabranoVozilo { get; set; }
 
         public string OdabraniServiser { get; set; }

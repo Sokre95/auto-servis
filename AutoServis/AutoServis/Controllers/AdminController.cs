@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,35 +11,35 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace AutoServis.Controllers
 {
-	[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
-	{
-		private readonly ApplicationDbContext _context;
+    {
+        private readonly ApplicationDbContext _context;
 
-		public AdminController()
-		{
-			_context = new ApplicationDbContext();
-		}
+        public AdminController()
+        {
+            _context = new ApplicationDbContext();
+        }
 
-	    protected override void Dispose(bool disposing)
-	    {
+        protected override void Dispose(bool disposing)
+        {
             _context.Dispose();
-	    }
+        }
 
-	    public ActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
 
-	    public ActionResult Serviseri()
-	    {
+        public ActionResult Serviseri()
+        {
             return View(DohvatiKorisnikePoUlozi("serviser"));
-	    }
+        }
 
-	    public ActionResult Korisnici()
-	    {
-	        return View(DohvatiKorisnikePoUlozi("Korisnik"));
-	    }
+        public ActionResult Korisnici()
+        {
+            return View(DohvatiKorisnikePoUlozi("Korisnik"));
+        }
 
         public ActionResult DodajServisera()
         {
@@ -48,34 +47,34 @@ namespace AutoServis.Controllers
         }
 
         [HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> DodajServisera(ServiserViewModel model)
-		{
-			if (ModelState.IsValid)
-			{
-				var user = new Serviser
-				{
-					UserName = model.Email,
-					Email = model.Email,
-					Ime = model.Ime,
-					Prezime = model.Prezime,
-					PhoneNumber = model.BrojTel
-				};
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DodajServisera(ServiserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new Serviser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Ime = model.Ime,
+                    Prezime = model.Prezime,
+                    PhoneNumber = model.BrojTel
+                };
 
-				var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
-				var result = await userManager.CreateAsync(user, model.Password);
+                var result = await userManager.CreateAsync(user, model.Password);
 
-				if (result.Succeeded)
-				{
-					await userManager.AddToRoleAsync(user.Id, "Serviser");
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user.Id, "Serviser");
 
-					return RedirectToAction("Serviseri");
-				}
-			}
+                    return RedirectToAction("Serviseri");
+                }
+            }
 
-			return View(model);
-		}
+            return View(model);
+        }
 
         public ActionResult DodajKorisnika()
         {
@@ -136,18 +135,14 @@ namespace AutoServis.Controllers
 
             var uloge = korisnik.Roles;
 
-            foreach(var uloga in uloge)
+            foreach (var uloga in uloge)
             {
                 var imeUloge = _context.Roles.FirstOrDefault(r => r.Id == uloga.RoleId).Name;
 
                 if (imeUloge.Equals("Serviser"))
-                {
-                    return RedirectToAction("IzmjeniServisera", (Serviser)korisnik);
-                }
-                else if (imeUloge.Equals("Korisnik"))
-                {
-                    return RedirectToAction("IzmjeniKorisnika", (Korisnik)korisnik);
-                }
+                    return RedirectToAction("IzmjeniServisera", (Serviser) korisnik);
+                if (imeUloge.Equals("Korisnik"))
+                    return RedirectToAction("IzmjeniKorisnika", (Korisnik) korisnik);
             }
 
             return RedirectToAction("Serviseri");
@@ -155,50 +150,49 @@ namespace AutoServis.Controllers
 
         public void IzmjeniKorisnika(Korisnik korisnik)
         {
-
         }
 
-	    public ActionResult IzmjeniServisera(Serviser serviser)
-	    {
-	        var viewModel = new ServiserViewModel
-	        {
+        public ActionResult IzmjeniServisera(Serviser serviser)
+        {
+            var viewModel = new ServiserViewModel
+            {
                 Email = serviser.Email,
                 Ime = serviser.Ime,
                 Prezime = serviser.Prezime,
                 BrojTel = serviser.PhoneNumber
-	        };
+            };
 
-	        return View(viewModel);
-	    }
+            return View(viewModel);
+        }
 
-		public ActionResult KontaktServisa()
-		{
-		    var model = _context.Kontakti.First();
+        public ActionResult KontaktServisa()
+        {
+            var model = _context.Kontakti.First();
 
-			return View(model);
-		}
+            return View(model);
+        }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult KontaktServisa(Kontakt model)
-		{
-		    if (ModelState.IsValid)
-		    {
-		        var dataFromDB = _context.Kontakti.First();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult KontaktServisa(Kontakt model)
+        {
+            if (ModelState.IsValid)
+            {
+                var dataFromDB = _context.Kontakti.First();
 
-		        dataFromDB.Adresa = model.Adresa;
-		        dataFromDB.BrojTel = model.BrojTel;
-		        dataFromDB.Email = model.Email;
-		        dataFromDB.ImeServisa = model.ImeServisa;
-		        dataFromDB.Mjesto = model.Mjesto;
-                 
+                dataFromDB.Adresa = model.Adresa;
+                dataFromDB.BrojTel = model.BrojTel;
+                dataFromDB.Email = model.Email;
+                dataFromDB.ImeServisa = model.ImeServisa;
+                dataFromDB.Mjesto = model.Mjesto;
+
                 _context.SaveChanges();
 
                 return RedirectToAction("Contact", "Home");
             }
 
-		    return View(model);
-		}
+            return View(model);
+        }
 
         [HttpPost]
         public ActionResult Izbrisi(string Id)
@@ -208,7 +202,7 @@ namespace AutoServis.Controllers
             _context.Users.Remove(userInDb);
             _context.SaveChanges();
 
-            return Json(new { success = true });
+            return Json(new {success = true});
         }
 
         public ActionResult OsvjeziServisere()
@@ -228,13 +222,12 @@ namespace AutoServis.Controllers
             var roleId = roleManager.FindByName(uloga).Id;
 
             IEnumerable<ApplicationUser> korisnici = _context.Users
-                        .Where(u => u.Roles.Any(r => r.RoleId == roleId))
-                        .ToList();
+                .Where(u => u.Roles.Any(r => r.RoleId == roleId))
+                .ToList();
 
             var listaKorisnika = new List<KorisniciZaAdminaViewModel>();
 
             foreach (var korisnik in korisnici)
-            {
                 listaKorisnika.Add(new KorisniciZaAdminaViewModel
                 {
                     Id = korisnik.Id,
@@ -243,9 +236,8 @@ namespace AutoServis.Controllers
                     BrojTel = korisnik.PhoneNumber,
                     Email = korisnik.Email
                 });
-            }
 
             return listaKorisnika;
         }
-	}
+    }
 }

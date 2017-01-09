@@ -1,7 +1,8 @@
-﻿$(document).ready(function () {
-    $("#korisnici").DataTable();
-    $(".del").click(Delete);
-});
+﻿$(document)
+    .ready(function() {
+        $("#korisnici").DataTable();
+        $(".del").click(Delete);
+    });
 
 function Delete(uloga) {
     var serviserId = $(this).data("serviser-id");
@@ -9,12 +10,12 @@ function Delete(uloga) {
     $.ajax({
         method: "POST",
         url: url,
-        success: function () {
+        success: function() {
             Refresh();
-            alert("Brisanje " + uloga + " uspješno.")
+            alert("Brisanje " + uloga + " uspješno.");
         },
-        error: function () {
-            alert("Neuspješno brisanje " + uloga)
+        error: function() {
+            alert("Neuspješno brisanje " + uloga);
         }
     });
 }

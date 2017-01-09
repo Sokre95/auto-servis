@@ -7,13 +7,13 @@
 
 <h2>Izmjeni podatke o serviseru</h2>
 
-@using (Html.BeginForm("DodajServisera", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("DodajServisera", "Admin", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
 {
     @Html.AntiForgeryToken()
     @Html.Partial("_ServiserForm")
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary" value="Izmjeni" />
+            <input type="submit" class="btn btn-primary" value="Izmjeni"/>
         </div>
     </div>
 }
@@ -21,4 +21,3 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-

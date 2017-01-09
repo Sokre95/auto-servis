@@ -6,7 +6,7 @@
 }
 
 <h2>Korisnici</h2>
-<hr />
+<hr/>
 <div class="form-group">
     <div class="btn btn-default">@Html.ActionLink("Dodaj korisnika", "DodajKorisnika", "Admin")</div>
 </div>
@@ -17,13 +17,14 @@
 
 @section Scripts
 {
-    
+
     <script>
 
-        $(document).ready(function () {
-            $("#korisnici").DataTable();
-            $(".del").click(Delete);
-        });
+        $(document)
+            .ready(function() {
+                $("#korisnici").DataTable();
+                $(".del").click(Delete);
+            });
 
         function Delete() {
             var korisnikId = $(this).data("korisnik-id");
@@ -32,23 +33,24 @@
             $.ajax({
                 method: "POST",
                 url: url,
-                success: function () {
+                success: function() {
                     Refresh();
                     alert("Brisanje korisnika uspješno.");
                 },
-                error: function () {
+                error: function() {
                     alert("Neuspješno brisanje korisnika");
                 }
             });
         }
 
         function Refresh() {
-            $("#modul-korisnici").load('/Admin/OsvjeziKorisnike', function () {
-                $('#korisnici').DataTable();
-                $(".del").click(Delete);
-            });
+            $("#modul-korisnici")
+                .load('/Admin/OsvjeziKorisnike',
+                    function() {
+                        $('#korisnici').DataTable();
+                        $(".del").click(Delete);
+                    });
         }
 
     </script>
 }
-

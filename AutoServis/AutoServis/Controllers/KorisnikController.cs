@@ -40,15 +40,15 @@ namespace AutoServis.Controllers
                     GodProizv = vozilo.GodProizv,
                     Tip = vozilo.TipVozila.Naziv
                 });
-            List<PopravakViewModel> popravciModel = new List<PopravakViewModel>();
-            List<Popravak> popravci = _context.Popravci.Where(popravak => popravak.KorisnikId.Equals(korisnik.Id)).ToList();
+            var popravciModel = new List<PopravakViewModel>();
+            var popravci = _context.Popravci.Where(popravak => popravak.KorisnikId.Equals(korisnik.Id)).ToList();
             foreach (var popravak in popravci)
             {
                 var s = _context.Users.First(user => popravak.ServiserId.Equals(user.Id));
-                string serviser = s.Ime + " " + s.Prezime;
+                var serviser = s.Ime + " " + s.Prezime;
                 var v = _context.Vozila.First(t => popravak.VoziloId.Equals(t.Id.ToString()));
-                string vozilo = v.RegOznaka + " - " + v.TipVozila.Naziv;
-                popravciModel.Add(new PopravakViewModel()
+                var vozilo = v.RegOznaka + " - " + v.TipVozila.Naziv;
+                popravciModel.Add(new PopravakViewModel
                 {
                     Serviser = serviser,
                     Vozilo = vozilo,
@@ -56,7 +56,7 @@ namespace AutoServis.Controllers
                     DodatniOpis = popravak.DodatniOpis
                 });
             }
-            
+
             var viewModel = new IndexKorisnikViewModel
             {
                 Ime = korisnik.Ime,
@@ -157,9 +157,7 @@ namespace AutoServis.Controllers
         public ActionResult CreateRepair(RepairOptionsViewModel viewModel)
         {
             if (viewModel.OdabraneUsluge.Count(usluga => !usluga.Equals("false")).Equals(0))
-            {
                 ModelState.AddModelError("odabraneUslugeError", "Odaberite barem jednu uslugu");
-            }
             if (ModelState.IsValid)
             {
                 ICollection<string> odabraneUsluge = viewModel.OdabraneUsluge.ToList();
