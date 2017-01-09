@@ -9,11 +9,8 @@
 <hr/>
 
 <ul class="list-group list">
-    <li class="list-group-item">
-        Ime: @Model.Ime
-    </li>
-    <li class="list-group-item">
-        Prezime: @Model.Prezime
+    <li class="list-group-item active">
+        Ime i prezime: @Model.Ime @Model.Prezime
     </li>
     <li class="list-group-item">
         Broj telefona: @Model.BrojTel
@@ -26,27 +23,31 @@
     <div class="col-md-6">
         <h2>Vozila</h2>
         <hr/>
-        <ul class="list-group list">
-            @foreach (var vozilo in Model.Vozila)
-            {
-                <li class="list-group-item">
-                    Tip vozila: @vozilo.Tip<br/>
-                    Registarska oznaka: @vozilo.RegOznaka<br/>
-                    Godina proizvodnje: @vozilo.GodProizv
-                </li>
-            }
-        </ul>
+        @foreach (var vozilo in Model.Vozila)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>Vozilo: @vozilo.Tip</h4>
+                </div>
+                <div class="panel-body">
+                    <p>Registarska oznaka: @vozilo.RegOznaka</p>
+                    <p>Godina proizvodnje: @vozilo.GodProizv</p>
+                </div>
+            </div>
+        }
     </div>
     <div class="col-md-6">
         <h2>Popravci</h2>
         <hr/>
-        <ul class="list-group list">
-            @foreach (var popravak in Model.Popravci)
-            {
-                <li class="list-group-item">
-                    Vozilo: @popravak.Vozilo<br/>
-                    Serviser: @popravak.Serviser<br/>
-                    Usluge:
+        @foreach (var popravak in Model.Popravci)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>Popravak vozila: @popravak.Vozilo</h4>
+                </div>
+                <div class="panel-body">
+                    <p>Serviser: @popravak.Serviser</p>
+                    <p>Usluge:</p>
                     <ul class="list-group list">
                         @foreach (var usluga in popravak.Usluge)
                         {
@@ -54,9 +55,9 @@
                         }
                     </ul>
                     Dodatan opis: @popravak.DodatniOpis
-                </li>
-            }
-        </ul>
+                </div>
+            </div>
+        }
         <hr/>
     </div>
 </div>
