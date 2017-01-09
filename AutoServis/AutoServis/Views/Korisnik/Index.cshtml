@@ -39,6 +39,24 @@
     </div>
     <div class="col-md-6">
         <h2>Popravci</h2>
+        <hr />
+        <ul class="list-group list">
+            @foreach (var popravak in Model.Popravci)
+            {
+                <li class="list-group-item">
+                    Vozilo: @popravak.Vozilo<br/>
+                    Serviser: @popravak.Serviser<br/>
+                    Usluge:
+                    <ul class="list-group list">
+                        @foreach (var usluga in @popravak.Usluge)
+                        {
+                            <li class="list-group-item">@usluga</li>
+                        }
+                    </ul>
+                    Dodatan opis: @popravak.DodatniOpis
+                </li>
+            }
+        </ul>
         <hr/>
     </div>
 </div>

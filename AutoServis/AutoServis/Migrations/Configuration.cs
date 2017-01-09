@@ -70,7 +70,7 @@ namespace AutoServis.Migrations
                 Naziv = "Zafira"
             });
             // usluge
-            IEnumerable<Usluga> usluge = new List<Usluga>
+            Usluga[] usluge = new Usluga[]
             {
                 new Usluga {Id = 1, Opis = "Izmjena ulja motora"},
                 new Usluga {Id = 2, Opis = "Ugradnja kocionih plocica"},
@@ -85,7 +85,7 @@ namespace AutoServis.Migrations
                 new Usluga {Id = 11, Opis = "Izmjena zupèastog remena i zatezaca"},
                 new Usluga {Id = 12, Opis = "Ultrazvucno ciscenje injektora"}
             };
-            context.Usluge.AddRange(usluge);
+            context.Usluge.AddOrUpdate(usluge);
             // zamjenska vozila
             context.ZamjenskaVozila.AddOrUpdate(vozilo => vozilo.Id, new ZamjenskoVozilo
             {

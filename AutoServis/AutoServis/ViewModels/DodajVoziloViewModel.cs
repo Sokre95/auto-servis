@@ -20,6 +20,7 @@ namespace AutoServis.ViewModels
         public IEnumerable<TipVozila> TipoviVozila { get; set; }
 
         [Required(ErrorMessage = "Odaberite tip vozila")]
+        [Display(Name = "Tip vozila")]
         public int TipVozilaId { get; set; }
     }
 }

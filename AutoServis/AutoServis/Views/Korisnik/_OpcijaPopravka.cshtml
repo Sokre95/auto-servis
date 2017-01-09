@@ -1,0 +1,109 @@
+﻿@model AutoServis.ViewModels.RepairOptionsViewModel
+@{
+    ViewBag.Title = "Popravak";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Prijava vozila na popravak</h2>
+<hr/>
+<h4>Detalji prijave</h4>
+@using (Html.BeginForm("CreateRepair", "Korisnik", FormMethod.Post))
+{
+    Html.EnableClientValidation(true);
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal" id="createRepairForm">
+        <div class="form-group">
+            <p class="col-md-offset-2 col-md-10">Odaberite jedan od dostupnih termina u slijedecih 10 dana</p>
+            @Html.LabelFor(m => m.OdabraniTermin, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.OdabraniTermin, Model.DostupniTermini, "Odaberite termin", new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.OdabraniTermin)
+            </div>
+        </div>
+        <hr/>
+        <div class="form-group">
+            @Html.LabelFor(m => m.OdabraneUsluge, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                <ul class="list-group checked-list-box col-md-4">
+                    @for (int i = 0; i < Model.Usluge.Count(); i++)
+                    {
+                        <li class="list-group-item">
+                            @Html.CheckBox("OdabraneUsluge", new {@value = @Model.Usluge.ElementAt(i).Id})
+                            @Model.Usluge.ElementAt(i).Opis
+                        </li>
+                    }
+                </ul>
+                @Html.ValidationMessageFor(m => m.OdabraneUsluge)
+                @Html.ValidationMessage("odabraneUslugeError")
+            </div>
+            <span class="field-validation-error col-md-offset-2 col-md-10" id="validationMessage"></span>
+        </div>
+        <hr/>
+        <div class="form-group">
+            @Html.LabelFor(m => m.DodatanOpis, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.DodatanOpis, new {@class = "form-control", rows = "8", placeholder = "Ovdje unesite opis kvara/problema upucen serviseru"})
+                @Html.ValidationMessageFor(m => m.DodatanOpis)
+            </div>
+        </div>
+        <hr/>
+        <div class="form-group">
+            @if (Model.ZamjenskaVozila.Count().Equals(0))
+            {
+                <p class="col-md-offset-2 col-md-10">Trenutno nema slobodnih zamjenskih vozila</p>
+            }
+            else
+            {
+                <p class="col-md-offset-2 col-md-10">Želite li zamjensko vozilo za vrijeme trajanja servisa</p>
+                <div class="col-md-offset-2 col-md-10">
+                    <label>
+                        @Html.CheckBoxFor(m => m.ZamjenskoVozilo)
+                        Želim zamjensko vozilo
+                    </label>
+                </div>
+            }
+        </div>
+        @Html.HiddenFor(Model => Model.OdabranoVozilo)
+        @Html.HiddenFor(Model => Model.OdabraniServiser)
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="SubmitButton" onclick="return submitWith();" value="Potvrdi prijavu" class="btn btn-default"/>
+            </div>
+        </div>
+        <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Potvrda prijave popravka</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Potvrdom prijave završavate prijavu i rezervirate svoj termin</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Odustani</button>
+                        <a class="btn btn-danger">Potvrdi prijavu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+        function submitWith() {
+            var checkedCount = $("input:checked").length;
+            var valid = checkedCount > 0;
+            if (!valid) {
+                $('#validationMessage').html('Odaberite najmanje jednu uslugu');
+            }
+            return valid;
+        }
+    </script>
+}

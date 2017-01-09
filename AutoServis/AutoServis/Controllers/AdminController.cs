@@ -191,7 +191,7 @@ namespace AutoServis.Controllers
 		        dataFromDB.Email = model.Email;
 		        dataFromDB.ImeServisa = model.ImeServisa;
 		        dataFromDB.Mjesto = model.Mjesto;
-
+                 
                 _context.SaveChanges();
 
                 return RedirectToAction("Contact", "Home");

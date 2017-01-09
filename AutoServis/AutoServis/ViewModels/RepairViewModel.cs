@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.WebPages.Html;
-using AutoServis.Models;
-using SelectListItem = System.Web.Mvc.SelectListItem;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace AutoServis.ViewModels
 {
     public class RepairViewModel
     {
-        public IEnumerable<Vozilo> vozila { get; set; }
-        public Vozilo odabranoVozilo { get; set; }
-        public IEnumerable<Serviser> serviseri { get; set; }
-        public Serviser odabraniServiser { get; set; }
-        public IEnumerable<SelectListItem> dostupniTermini { get; set; }
-        public DateTime odabraniTermin { get; set; }
+        public IEnumerable<SelectListItem> Vozila { get; set; }
+
+        [Required(ErrorMessage = "Odaberite vozilo za popravak")]
+        [DisplayName("Odaberite vozilo")]
+        public string OdabranoVozilo { get; set; }
+
+        public IEnumerable<SelectListItem> Serviseri { get; set; }
+
+        [DisplayName("Odaberite servisera")]
+        public string OdabraniServiser { get; set; }
     }
 }

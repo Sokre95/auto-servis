@@ -11,7 +11,7 @@ namespace AutoServis.Models
     {
         public int Id { get; set; }
 
-        [StringLength(100)]
+        [StringLength(500)]
         public string Opis { get; set; }
 
         public virtual ICollection<Popravak> Popravci { get; set; }
