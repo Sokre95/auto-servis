@@ -13,6 +13,7 @@ namespace AutoServis.Migrations
         {
             AutomaticMigrationsEnabled = true;
         }
+
         protected override void Seed(ApplicationDbContext context)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
