@@ -17,24 +17,24 @@
             @Html.AntiForgeryToken()
             <div class="form-horizontal">
                 <div class="form-group">
-                    @Html.LabelFor(m => m.OdabranoVozilo, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.OdabranoVozilo, new {@class = "col-md-2 control-label"})
                     <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.OdabranoVozilo, Model.Vozila, "odaberite vozilo", new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.OdabranoVozilo, Model.Vozila, "odaberite vozilo", new {@class = "form-control"})
                         @Html.ValidationMessageFor(m => m.OdabranoVozilo)
                     </div>
                 </div>
                 <div class="form-group">
                     <p class="col-md-offset-2 col-md-10">Ukoliko ne odaberete servisera sustav će vam ga automatski dodjeliti</p>
-                    @Html.LabelFor(m => m.OdabraniServiser, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.OdabraniServiser, new {@class = "col-md-2 control-label"})
                     <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.OdabraniServiser, Model.Serviseri, "odaberite servisera", new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.OdabraniServiser, Model.Serviseri, "odaberite servisera", new {@class = "form-control"})
                         @Html.ValidationMessageFor(m => m.OdabraniServiser)
                     </div>
                 </div>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Nastavi" class="btn btn-primary" />
+                        <input type="submit" value="Nastavi" class="btn btn-primary"/>
                     </div>
                 </div>
             </div>

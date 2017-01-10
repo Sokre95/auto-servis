@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Quartz;
+﻿using Quartz;
 using Quartz.Impl;
 
 namespace AutoServis.Services
 {
     public class EmailReminder
     {
-        private int _interval;
-        private string _message;
-        private string _emailTo;
+        private readonly string _emailTo;
+        private readonly int _interval;
+        private readonly string _message;
 
         public EmailReminder(int interval, string message, string emailTo)
         {

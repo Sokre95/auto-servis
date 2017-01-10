@@ -17,7 +17,8 @@ namespace AutoServis.Services
             using (StringWriter sw = new StringWriter())
             {
                 ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(context, viewName);
-                ViewContext viewContext = new ViewContext(context, viewResult.View, viewData, new TempDataDictionary(), sw);
+                ViewContext viewContext = new ViewContext(context, viewResult.View, viewData, new TempDataDictionary(),
+                    sw);
                 viewResult.View.Render(viewContext, sw);
 
                 return sw.GetStringBuilder().ToString();

@@ -166,7 +166,8 @@ namespace AutoServis.Controllers
                         popravak.ServiserId.Equals(viewModel.OdabraniServiser)) != null
             )
             {
-                ModelState.AddModelError("repairCollision", "U međuvremenu je netko prijavio popravak u istom terminu kod odabranog servisera. Molimo odaberite drugi termin");
+                ModelState.AddModelError("repairCollision",
+                    "U međuvremenu je netko prijavio popravak u istom terminu kod odabranog servisera. Molimo odaberite drugi termin");
             }
             if (ModelState.IsValid)
             {
