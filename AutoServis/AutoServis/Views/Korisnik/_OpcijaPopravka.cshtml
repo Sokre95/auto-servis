@@ -1,4 +1,5 @@
-﻿@model AutoServis.ViewModels.RepairOptionsViewModel
+﻿@using System.Linq
+@model AutoServis.ViewModels.RepairOptionsViewModel
 @{
     ViewBag.Title = "Popravak";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,39 +15,30 @@
         <div class="form-horizontal" id="createRepairForm">
             <div class="form-group">
                 <p class="col-md-offset-2 col-md-10">Odaberite jedan od dostupnih termina u slijedecih 10 dana</p>
-                @Html.LabelFor(m => m.OdabraniTermin, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.OdabraniTermin, new {@class = "col-md-2 control-label"})
                 <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.OdabraniTermin, Model.DostupniTermini, "Odaberite termin", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.OdabraniTermin, Model.DostupniTermini, "Odaberite termin", new {@class = "form-control"})
                     @Html.ValidationMessageFor(m => m.OdabraniTermin)
                 </div>
             </div>
-            <hr />
+            <hr/>
             <div class="form-group">
-                @Html.LabelFor(m => m.OdabraneUsluge, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.OdabraneUsluge, new {@class = "col-md-2 control-label"})
                 <div class="col-md-10">
-                    <ul class="list-group checked-list-box col-md-4">
-                        @for (var i = 0; i < Model.Usluge.Count(); i++)
-                        {
-                            <li class="list-group-item">
-                                @Html.CheckBox("OdabraneUsluge", new { value = Model.Usluge.ElementAt(i).Id })
-                                @Model.Usluge.ElementAt(i).Opis
-                            </li>
-                        }
-                    </ul>
+                    @Html.ListBoxFor(m => m.OdabraneUsluge, new MultiSelectList(Model.Usluge, "Id", "Opis"), new {@class = "form-control", @multiple = "multiple"})
                     @Html.ValidationMessageFor(m => m.OdabraneUsluge)
-                    @Html.ValidationMessage("odabraneUslugeError")
                 </div>
                 <span class="field-validation-error col-md-offset-2 col-md-10" id="validationMessage"></span>
             </div>
-            <hr />
+            <hr/>
             <div class="form-group">
-                @Html.LabelFor(m => m.DodatanOpis, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.DodatanOpis, new {@class = "col-md-2 control-label"})
                 <div class="col-md-10">
-                    @Html.TextAreaFor(m => m.DodatanOpis, new { @class = "form-control", rows = "8", placeholder = "Ovdje unesite opis kvara/problema upucen serviseru" })
+                    @Html.TextAreaFor(m => m.DodatanOpis, new {@class = "form-control", rows = "8", placeholder = "Ovdje unesite opis kvara/problema upucen serviseru"})
                     @Html.ValidationMessageFor(m => m.DodatanOpis)
                 </div>
             </div>
-            <hr />
+            <hr/>
             <div class="form-group">
                 @if (Model.ZamjenskaVozila.Count().Equals(0))
                 {
@@ -65,10 +57,10 @@
             </div>
             @Html.HiddenFor(Model => Model.OdabranoVozilo)
             @Html.HiddenFor(Model => Model.OdabraniServiser)
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" id="SubmitButton" onclick="return submitWith();" value="Potvrdi prijavu" class="btn btn-primary" />
+                    <input type="submit" id="SubmitButton" onclick="return submitWith();" value="Potvrdi prijavu" class="btn btn-primary"/>
                 </div>
             </div>
         </div>
@@ -77,6 +69,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
+    <!--
     <script>
         function submitWith() {
             var checkedCount = $("input:checked").length;
@@ -87,4 +80,5 @@
             return valid;
         }
     </script>
+    -->
 }
