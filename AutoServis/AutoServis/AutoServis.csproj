@@ -184,8 +184,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KorisnikController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Services\EmailReminder.cs" />
     <Compile Include="Services\Mailer.cs" />
     <Compile Include="Services\PartialToStringRenderer.cs" />
+    <Compile Include="Services\EmailRemindJob.cs" />
     <Compile Include="ViewModels\PopravakViewModel.cs" />
     <Compile Include="ViewModels\RepairInfoViewModel.cs" />
     <Compile Include="ViewModels\RepairOptionsViewModel.cs" />
@@ -599,6 +601,7 @@
     <Content Include="Views\Korisnik\_PopravakInfo.cshtml" />
     <Content Include="Views\Korisnik\PopravakInfoWeb.cshtml" />
     <Content Include="Views\Korisnik\PopravakInfoMail.cshtml" />
+    <Content Include="Views\Korisnik\PopravakMailReminder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

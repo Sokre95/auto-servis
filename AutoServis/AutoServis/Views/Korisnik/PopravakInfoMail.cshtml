@@ -10,14 +10,14 @@
 </head>
 <body>
 @Html.Partial("_PopravakInfo", Model)
-    <address>
-        @Model.Kontakt.Adresa <br />
-        @Model.Kontakt.Mjesto <br />
-        Telefon : @Model.Kontakt.BrojTel
-    </address>
-    <address>
-        <strong>Email:</strong> <a href="@Model.Kontakt.Email">@Model.Kontakt.Email</a><br />
-    </address>
+<address>
+    @Model.Kontakt.Adresa <br/>
+    @Model.Kontakt.Mjesto <br/>
+    Telefon : @Model.Kontakt.BrojTel
+</address>
+<address>
+    <strong>Email:</strong> <a href="@Model.Kontakt.Email">@Model.Kontakt.Email</a><br/>
+</address>
 @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>

@@ -159,6 +159,15 @@ namespace AutoServis.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateRepair(RepairOptionsViewModel viewModel)
         {
+            if (
+                _context.Popravci.First(
+                    popravak =>
+                        popravak.DatumVrijeme.ToString().Equals(viewModel.OdabraniTermin) &
+                        popravak.ServiserId.Equals(viewModel.OdabraniServiser)) != null
+            )
+            {
+                ModelState.AddModelError("repairCollision", "U međuvremenu je netko prijavio popravak u istom terminu kod odabranog servisera. Molimo odaberite drugi termin");
+            }
             if (ModelState.IsValid)
             {
                 ICollection<string> odabraneUsluge = viewModel.OdabraneUsluge.ToList();
@@ -189,7 +198,6 @@ namespace AutoServis.Controllers
                 }
                 _context.Popravci.Add(popravak);
                 _context.SaveChanges();
-
                 return RedirectToAction("RepairInfo", popravak);
             }
             return PartialView("_OpcijaPopravka", viewModel);
@@ -220,9 +228,21 @@ namespace AutoServis.Controllers
             message.Body = PartialToStringRenderer.RenderViewToString(ControllerContext,
                 "~/Views/Korisnik/PopravakInfoMail.cshtml", infoModel);
             message.IsBodyHtml = true;
-
+            // send mail about repair details
             var mailer = Mailer.Create("smtp.gmail.com", 587, "serviserinfo1@gmail.com", "serviser123", true);
             mailer.SendMail(message);
+            // repair term
+            var daydiff = (popravak.DatumVrijeme - DateTime.Today).TotalDays;
+            if (daydiff >= 3.0)
+            {
+                var msg = PartialToStringRenderer.RenderViewToString(ControllerContext,
+                    "~/Views/Korisnik/PopravakMailReminder.cshtml", infoModel);
+                // za pravi reminder interval je izraz: ((int)Math.Floor(daydiff)-1)*24*60
+                // radi testiranja stavljeno je 2 min  
+                var reminder = new EmailReminder(2, msg, popravak.Korisnik.Email);
+                reminder.Start();
+            }
+
             return PartialView("PopravakInfoWeb", infoModel);
         }
 
