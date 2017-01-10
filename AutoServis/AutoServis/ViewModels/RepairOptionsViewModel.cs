@@ -18,7 +18,7 @@ namespace AutoServis.ViewModels
 
         [Required(ErrorMessage = "Odaberite najmanje jednu uslugu")]
         [DisplayName("Odaberite usluge")]
-        public ICollection<string> OdabraneUsluge { get; set; }
+        public IEnumerable<string> OdabraneUsluge { get; set; }
 
         public IEnumerable<ZamjenskoVozilo> ZamjenskaVozila { get; set; }
 

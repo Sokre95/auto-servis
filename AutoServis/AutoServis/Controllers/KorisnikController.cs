@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
@@ -149,7 +150,7 @@ namespace AutoServis.Controllers
                     Usluge = _context.Usluge,
                     ZamjenskaVozila = _context.ZamjenskaVozila.Where(vozilo => vozilo.Dostupno.Equals(true))
                 };
-                return PartialView("_OpcijaPopravka", model);
+                return View("_OpcijaPopravka", model);
             }
             return View("Repair", viewModel);
         }
@@ -158,8 +159,6 @@ namespace AutoServis.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateRepair(RepairOptionsViewModel viewModel)
         {
-            if (viewModel.OdabraneUsluge.Count(usluga => !usluga.Equals("false")).Equals(0))
-                ModelState.AddModelError("odabraneUslugeError", "Odaberite barem jednu uslugu");
             if (ModelState.IsValid)
             {
                 ICollection<string> odabraneUsluge = viewModel.OdabraneUsluge.ToList();
@@ -183,9 +182,10 @@ namespace AutoServis.Controllers
 
                 if (viewModel.ZamjenskoVozilo.Equals(true))
                 {
-                    var zamjenskoVozilo = _context.ZamjenskaVozila.First();
+                    var zamjenskoVozilo = _context.ZamjenskaVozila.First(zamvoz => zamvoz.Dostupno.Equals(true));
                     zamjenskoVozilo.Dostupno = false;
                     popravak.ZamjenskoVozilo = zamjenskoVozilo;
+                    _context.ZamjenskaVozila.AddOrUpdate(zamjenskoVozilo);
                 }
                 _context.Popravci.Add(popravak);
                 _context.SaveChanges();

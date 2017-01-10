@@ -23,11 +23,14 @@ namespace AutoServis
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js"));
+                "~/Scripts/respond.js",
+                "~/Scripts/bootstrap-select.js",
+                "~/Scripts/bootstrap-multiselect.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.flatly.css",
-                "~/Content/site.css"));
+                "~/Content/site.css",
+                "~/Content/bootstrap-multiselect.css"));
         }
     }
 }
