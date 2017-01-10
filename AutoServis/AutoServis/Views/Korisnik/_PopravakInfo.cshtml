@@ -1,0 +1,32 @@
+﻿@model AutoServis.ViewModels.RepairInfoViewModel
+
+<h2>Informacije o obavljenoj prijavi za popravak</h2>
+<hr/>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3>Popravak vozila: @Model.Vozilo</h3>
+    </div>
+    <div class="panel-body">
+        <p>Vaš serviser: @Model.Serviser</p>
+        <p>Vaš termin: @Model.OdabraniTermin</p>
+        <p>Odabrane usluge:</p>
+        <ul class="list-group list">
+            @foreach (var usluga in Model.Usluge)
+            {
+                <li class="list-group-item">@usluga</li>
+            }
+        </ul>
+        Dodatan opis: @Model.DodatanOpis
+        @if (Model.ZamjenskoVozilo != null)
+        {
+            <p>Zamjensko vozilo: @Model.ZamjenskoVozilo</p>
+        }
+        else
+        {
+            <p>Zamjensko vozilo: NE</p>
+        }
+    </div>
+</div>
+<hr/>
+<p>Zahvaljujemo na ukazanom povjerenju</p>
+<h4>Auto servis Najbolji Mehaničar</h4>

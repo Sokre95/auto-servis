@@ -184,7 +184,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KorisnikController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Services\Mailer.cs" />
+    <Compile Include="Services\PartialToStringRenderer.cs" />
     <Compile Include="ViewModels\PopravakViewModel.cs" />
+    <Compile Include="ViewModels\RepairInfoViewModel.cs" />
     <Compile Include="ViewModels\RepairOptionsViewModel.cs" />
     <Compile Include="Controllers\ServiserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -520,6 +523,9 @@
     <Content Include="Views\Admin\DodajKorisnika.cshtml" />
     <Content Include="Views\Korisnik\Repair.cshtml" />
     <Content Include="Views\Korisnik\_OpcijaPopravka.cshtml" />
+    <Content Include="Views\Korisnik\_PopravakInfo.cshtml" />
+    <Content Include="Views\Korisnik\PopravakInfoWeb.cshtml" />
+    <Content Include="Views\Korisnik\PopravakInfoMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

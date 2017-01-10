@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using AutoServis.Models;
+using AutoServis.Services;
 using AutoServis.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -168,9 +170,10 @@ namespace AutoServis.Controllers
                     serviserId = viewModel.OdabraniServiser;
                 else
                     serviserId = DohvatiSlobodneServisere().FirstOrDefault().Id;
+                var korisnikId = System.Web.HttpContext.Current.User.Identity.GetUserId();
                 var popravak = new Popravak
                 {
-                    KorisnikId = System.Web.HttpContext.Current.User.Identity.GetUserId(),
+                    KorisnikId = korisnikId,
                     VoziloId = viewModel.OdabranoVozilo,
                     ServiserId = serviserId,
                     DatumVrijeme = DateTime.Parse(viewModel.OdabraniTermin),
@@ -186,9 +189,41 @@ namespace AutoServis.Controllers
                 }
                 _context.Popravci.Add(popravak);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("RepairInfo", popravak);
             }
             return PartialView("_OpcijaPopravka", viewModel);
+        }
+
+        public ActionResult RepairInfo(Popravak p)
+        {
+            var popravak = _context.Popravci.Find(p.Id);
+            var serviser = _context.Users.First(u => u.Id.Equals(popravak.ServiserId));
+            var vozilo = _context.Vozila.First(v => popravak.VoziloId.Equals(v.Id.ToString()));
+            string zamjensko = null;
+            if (popravak.ZamjenskoVozilo != null)
+                zamjensko = popravak.ZamjenskoVozilo.RegOznaka;
+            var infoModel = new RepairInfoViewModel
+            {
+                Serviser = serviser.Ime + " " + serviser.Prezime,
+                Vozilo = vozilo.TipVozila.Naziv + " " + vozilo.RegOznaka,
+                Usluge = popravak.Usluge.Select(usluga => usluga.Opis).ToList(),
+                OdabraniTermin = popravak.DatumVrijeme.ToString(),
+                DodatanOpis = popravak.DodatniOpis,
+                ZamjenskoVozilo = zamjensko,
+                Kontakt = _context.Kontakti.First()
+            };
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(_context.Users.Find(popravak.KorisnikId).Email));
+            message.From = new MailAddress("najbolji.mehanicar.noreply@gmail.com");
+            message.Subject = "Prijavili ste termin popravka";
+            message.Body = PartialToStringRenderer.RenderViewToString(ControllerContext,
+                "~/Views/Korisnik/PopravakInfoMail.cshtml", infoModel);
+            message.IsBodyHtml = true;
+
+            var mailer = Mailer.Create("smtp.gmail.com", 587, "serviserinfo1@gmail.com", "serviser123", true);
+            mailer.SendMail(message);
+            return PartialView("PopravakInfoWeb", infoModel);
         }
 
         private IEnumerable<Serviser> DohvatiSlobodneServisere()
