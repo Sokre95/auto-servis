@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
@@ -51,13 +52,20 @@ namespace AutoServis.Controllers
                 var serviser = s.Ime + " " + s.Prezime;
                 var v = _context.Vozila.First(t => popravak.VoziloId.Equals(t.Id.ToString()));
                 var vozilo = v.RegOznaka + " - " + v.TipVozila.Naziv;
-                popravciModel.Add(new PopravakViewModel
+                var popravakViewmodel = new PopravakViewModel
                 {
                     Serviser = serviser,
                     Vozilo = vozilo,
                     Usluge = popravak.Usluge.Select(usluga => usluga.Opis).ToList(),
-                    DodatniOpis = popravak.DodatniOpis
-                });
+                    DodatniOpis = popravak.DodatniOpis,
+                    Termin = popravak.DatumVrijeme.ToString(),
+                    Napomena = popravak.Napomena
+                };
+                if (popravak.ZamjenskoVozilo != null)
+                {
+                    popravakViewmodel.ZamjenskoVozilo = popravak.ZamjenskoVozilo.RegOznaka;
+                }
+                popravciModel.Add(popravakViewmodel);
             }
 
             var viewModel = new IndexKorisnikViewModel
@@ -159,6 +167,8 @@ namespace AutoServis.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateRepair(RepairOptionsViewModel viewModel)
         {
+            // error Sequence contains no elements
+            /*
             if (
                 _context.Popravci.First(
                     popravak =>
@@ -169,6 +179,7 @@ namespace AutoServis.Controllers
                 ModelState.AddModelError("repairCollision",
                     "U međuvremenu je netko prijavio popravak u istom terminu kod odabranog servisera. Molimo odaberite drugi termin");
             }
+            */
             if (ModelState.IsValid)
             {
                 ICollection<string> odabraneUsluge = viewModel.OdabraneUsluge.ToList();
@@ -187,7 +198,8 @@ namespace AutoServis.Controllers
                     ServiserId = serviserId,
                     DatumVrijeme = DateTime.Parse(viewModel.OdabraniTermin),
                     Usluge = usluge,
-                    DodatniOpis = viewModel.DodatanOpis
+                    DodatniOpis = viewModel.DodatanOpis,
+                    Active = true
                 };
 
                 if (viewModel.ZamjenskoVozilo.Equals(true))
@@ -195,7 +207,6 @@ namespace AutoServis.Controllers
                     var zamjenskoVozilo = _context.ZamjenskaVozila.First(zamvoz => zamvoz.Dostupno.Equals(true));
                     zamjenskoVozilo.Dostupno = false;
                     popravak.ZamjenskoVozilo = zamjenskoVozilo;
-                    _context.ZamjenskaVozila.AddOrUpdate(zamjenskoVozilo);
                 }
                 _context.Popravci.Add(popravak);
                 _context.SaveChanges();
@@ -258,7 +269,7 @@ namespace AutoServis.Controllers
                 _context.Users.Where(user => user.Roles.Any(role => role.RoleId.Equals(roleId))).AsEnumerable();
             IEnumerable<DateTime> sviMoguciTermini = generirajTermine();
             IEnumerable<Popravak> popravci =
-                _context.Popravci.Where(popravak => popravak.DatumVrijeme.Day > DateTime.Today.Day).ToList();
+                _context.Popravci.Where(popravak => DateTime.Compare(popravak.DatumVrijeme, DateTime.Now) > 0).ToList();
             var zauzetiServiseri =
                 serviseri.Where(
                     serviser => popravci
@@ -281,7 +292,7 @@ namespace AutoServis.Controllers
                     .Where(
                         popravak =>
                             popravak.ServiserId.ToString().Equals(serviserId) &
-                            (popravak.DatumVrijeme.Day > DateTime.Today.Day))
+                            DateTime.Compare(popravak.DatumVrijeme, DateTime.Now) > 0)
                     .Select(popravak => popravak.DatumVrijeme);
             var termini = generirajTermine().Except(zauzetiTermini).AsEnumerable();
             return termini;

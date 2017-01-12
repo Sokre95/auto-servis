@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Informacije o korisniku</h2>
+<h2>Vaše informacije</h2>
 <hr/>
 
 <ul class="list-group list">
@@ -47,6 +47,7 @@
                 </div>
                 <div class="panel-body">
                     <p>Serviser: @popravak.Serviser</p>
+                    <p>Termin: @popravak.Termin</p>
                     <p>Usluge:</p>
                     <ul class="list-group list">
                         @foreach (var usluga in popravak.Usluge)
@@ -54,7 +55,16 @@
                             <li class="list-group-item">@usluga</li>
                         }
                     </ul>
-                    Dodatan opis: @popravak.DodatniOpis
+                    <p>Dodatan opis: @popravak.DodatniOpis</p>
+                    <p>Napomena servisera: @popravak.Napomena</p>
+                    @if (@popravak.ZamjenskoVozilo != null)
+                    {
+                        <p>Zamjensko vozilo: @popravak.ZamjenskoVozilo</p>
+                    }
+                    else
+                    {
+                        <p>Zamjenko vozilo nije odabrano</p>
+                    }
                 </div>
             </div>
         }

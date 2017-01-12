@@ -25,7 +25,7 @@ namespace AutoServis.ViewModels
         [DisplayName("Zamjensko vozilo")]
         public bool ZamjenskoVozilo { get; set; }
 
-        [StringLength(500)]
+        [StringLength(500, ErrorMessage = "Maksimalno 500 znakova")]
         [DisplayName("Dodatan opis")]
         public string DodatanOpis { get; set; }
 

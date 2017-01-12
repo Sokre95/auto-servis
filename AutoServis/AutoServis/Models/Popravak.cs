@@ -15,6 +15,11 @@ namespace AutoServis.Models
         [StringLength(500)]
         public string DodatniOpis { get; set; }
 
+        [StringLength(500)]
+        public string Napomena { get; set; }
+
+        public bool Active { get; set; }
+
         // Strani kljucevi...
         public string KorisnikId { get; set; }
 
