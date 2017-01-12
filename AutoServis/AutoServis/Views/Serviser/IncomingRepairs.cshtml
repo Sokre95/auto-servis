@@ -1,0 +1,20 @@
+﻿@model AutoServis.ViewModels.ServiserIncomingAndActiveRepairsViewModel
+@{
+    ViewBag.Title = "IncomingRepairs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="col-md-12">
+        <h2>Nadolazeći popravci</h2>
+        <hr/>
+        @if (Model.Popravci.Count > 0)
+        {
+            @Html.Partial("_Repairs", Model.Popravci.AsEnumerable())
+        }
+        else
+        {
+            <p>Nema nadolazečih popravaka</p>
+        }
+    </div>
+</div>

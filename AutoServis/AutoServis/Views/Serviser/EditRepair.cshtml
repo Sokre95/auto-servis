@@ -1,0 +1,79 @@
+﻿@model AutoServis.ViewModels.EditPopravakViewmodel
+@{
+    ViewBag.Title = "Popravak";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Izmjena detalja popravka</h2>
+<hr/>
+<div class="well bs-component">
+    <h4>Detalji prijave</h4>
+    @using (Html.BeginForm("EditRepair", "Serviser", FormMethod.Post))
+    {
+        Html.EnableClientValidation(true);
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal" id="createRepairForm">
+            <div class="form-group">
+                @Html.LabelFor(m => m.OdabraneUsluge, new {@class = "col-md-2 control-label"})
+                <div class="col-md-10">
+                    @Html.ListBoxFor(m => m.OdabraneUsluge, new MultiSelectList(Model.Usluge, "Id", "Opis"), new {@class = "form-control", @multiple = "multiple", @style = "min-height:200px;"})
+                    @Html.ValidationMessageFor(m => m.OdabraneUsluge)
+                    <span class="field-validation-error col-md-offset-2 col-md-10" id="validationMessage"></span>
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DodatanOpis, new {@class = "col-md-2 control-label"})
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.DodatanOpis, new {@class = "form-control", rows = "8", placeholder = "Ovdje unesite opis kvara/problema upucen serviseru"})
+                    @Html.ValidationMessageFor(m => m.DodatanOpis)
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group">
+                @if (Model.ZamjenskaVozila.Count().Equals(0))
+                {
+                    <p class="col-md-offset-2 col-md-10">Trenutno nema slobodnih zamjenskih vozila</p>
+                }
+                else
+                {
+                    @Html.LabelFor(m => m.ZamjenskoVozilo, new {@class = "col-md-2 control-label"})
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.ZamjenskoVozilo, new SelectList(Model.ZamjenskaVozila, "Id", "RegOznaka"), "Odaberite zamjensko vozilo", new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.ZamjenskoVozilo)
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Napomena, new {@class = "col-md-2 control-label"})
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.Napomena, new {@class = "form-control", rows = "8", placeholder = "Unesite napomenu koju će korisnik vidjeti"})
+                    @Html.ValidationMessageFor(m => m.Napomena)
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.IdPopravak)
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" id="SubmitButton" value="Potvrdi izmjene" class="btn btn-primary"/>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+        $('option')
+            .mousedown(function(e) {
+                e.preventDefault();
+                $(this).prop('selected', !$(this).prop('selected'));
+                return false;
+            });
+        $(document)
+            .ready(function() {
+                $('.multiselect').multiselect();
+            });
+    </script>
+}

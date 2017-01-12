@@ -1,0 +1,95 @@
+﻿@model AutoServis.ViewModels.ServiserIncomingAndActiveRepairsViewModel
+@{
+    ViewBag.Title = "ActiveRepairs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Aktivni popravci</h2>
+<p>Popravci u tijeku i nedovršeni popravci</p>
+<hr/>
+<div class="container">
+    <div class="col-md-12">
+        @foreach (var popravak in Model.Popravci)
+        {
+            <div class="well">
+                <div class="modal fade" tabindex="-1" role="dialog" id="archiveModal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Završetak popravka</h4>
+                            </div>
+                            @using (Html.BeginForm("ArchiveRepair", "Serviser", FormMethod.Post))
+                            {
+                                <div class="modal-body">
+
+                                    <p>Potvrdom će se obrazac popravka arhivirati </p>
+                                    @if (popravak.ZamjenskoVozilo != null)
+                                    {
+                                        <p>Ako je korisnik @popravak.Korisnik vratio zamjensko vozilo (@popravak.ZamjenskoVozilo) stavite kvačicu</p>
+                                        <label>Zamjensko vozilo vračeno ? @Html.CheckBox("zamjenskoVraceno")</label>
+                                        @Html.Hidden("popravakId", popravak.Id)
+                                    }
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Odustani</button>
+                                    <input type="submit" value="Potvrdi završetak popravka" class="btn btn-primary"/>
+                                </div>
+                            }
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4>Popravak vozila: @popravak.Vozilo</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p>Korisnik: @popravak.Korisnik</p>
+                        <p>
+                            Termin dolaska korisnika na servis: <strong>@popravak.Termin.ToString()</strong>
+                        </p>
+                        <p>Usluge:</p>
+                        <ul class="list-group list">
+                            @foreach (var usluga in popravak.Usluge)
+                            {
+                                <li class="list-group-item">@usluga</li>
+                            }
+                        </ul>
+                        @if (popravak.ZamjenskoVozilo != null)
+                        {
+                            <p>Zamjenko vozilo: @popravak.ZamjenskoVozilo</p>
+                        }
+                        else
+                        {
+                            <p>Zamjenko vozilo nije odabrano</p>
+                        }
+                        <p>Dodatan opis: @popravak.DodatniOpis</p>
+                        <p>Napomena servisera: @popravak.Napomena</p>
+                        @if (@popravak.ZamjenskoVozilo != null)
+                        {
+                            <p>Zamjensko vozilo: @popravak.ZamjenskoVozilo</p>
+                        }
+                        else
+                        {
+                            <p>Zamjenko vozilo nije odabrano</p>
+                        }
+                    </div>
+                </div>
+
+                @using (Html.BeginForm("EditRepair", "Serviser", FormMethod.Post))
+                {
+                    <form class="form">
+                        @Html.Hidden("popravakId", popravak.Id)
+                        <button type="submit" class="btn btn-primary">Izmjeni</button>
+                        @Html.ActionLink("Ispiši obrazac", "PrintRepairForm", "Serviser", new {@class = "btn btn btn-primary"})
+                        <span/>
+                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#archiveModal">
+                            Završi popravak
+                        </button>
+                    </form>
+                }
+            </div>
+        }
+    </div>
+</div>

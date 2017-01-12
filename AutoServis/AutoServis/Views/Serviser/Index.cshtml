@@ -1,6 +1,29 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model AutoServis.ViewModels.ServiserIndexViewModel
+@{
+    ViewBag.Title = "Serviser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Pocetna stranica servisera</h2>
+<h2>Vaše informacije</h2>
+<hr/>
+<ul class="list-group list">
+    <li class="list-group-item active">
+        Ime i prezime: @Model.Ime @Model.Prezime
+    </li>
+    <li class="list-group-item">
+        Broj telefona: @Model.BrojTel
+    </li>
+    <li class="list-group-item">
+        Email: @Model.Email
+    </li>
+</ul>
+<hr/>
+@if (!Model.Popravci.Count.Equals(0))
+{
+    <h2>Današnji dolasci korisnika u servis</h2>
+    @Html.Partial("_Repairs", Model.Popravci)
+}
+else
+{
+    <h4>Danas nema rezerviranih dolazaka na servis</h4>
+}

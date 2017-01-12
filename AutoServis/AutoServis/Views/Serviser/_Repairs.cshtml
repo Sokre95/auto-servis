@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AutoServis.ViewModels.PopravakZaServiseraViewModel>
+
+@foreach (var popravak in Model.AsEnumerable())
+{
+    <div class="well">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4>Popravak vozila: @popravak.Vozilo</h4>
+            </div>
+            <div class="panel-body">
+                <p>Korisnik: @popravak.Korisnik</p>
+                <p>
+                    Termin dolaska korisnika na servis: <strong>@popravak.Termin.ToString()</strong>
+                </p>
+                <p>Usluge:</p>
+                <ul class="list-group list">
+                    @foreach (var usluga in popravak.Usluge)
+                    {
+                        <li class="list-group-item">@usluga</li>
+                    }
+                </ul>
+                @if (popravak.ZamjenskoVozilo != null)
+                {
+                    <p>Zamjenko vozilo: @popravak.ZamjenskoVozilo</p>
+                }
+                else
+                {
+                    <p>Zamjenko vozilo nije odabrano</p>
+                }
+                <p>Dodatan opis: @popravak.DodatniOpis</p>
+                <p>Napomena servisera: @popravak.Napomena</p>
+                @if (@popravak.ZamjenskoVozilo != null)
+                {
+                    <p>Zamjensko vozilo: @popravak.ZamjenskoVozilo</p>
+                }
+                else
+                {
+                    <p>Zamjenko vozilo nije odabrano</p>
+                }
+            </div>
+        </div>
+
+        @using (Html.BeginForm("EditRepair", "Serviser", FormMethod.Get))
+        {
+            <form class="form">
+                @Html.Hidden("popravakId", popravak.Id)
+                <button type="submit" class="btn btn-primary">Izmjeni</button>
+                @Html.ActionLink("Ispiši obrazac", "printRepairForm", "Serviser", new {@class = "btn btn btn-primary"})
+            </form>
+        }
+
+
+    </div>
+}

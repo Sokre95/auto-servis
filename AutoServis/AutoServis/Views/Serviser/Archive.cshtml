@@ -1,0 +1,16 @@
+﻿@model List<AutoServis.ViewModels.PopravakZaServiseraViewModel>
+@{
+    ViewBag.Title = "Arhiva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Arhiva obavljenih popravaka</h2>
+<hr/>
+@if (!Model.Count.Equals(0))
+{
+    @Html.Partial("_Repairs", Model)
+}
+else
+{
+    <h4>Nema ariviranih obavljenih popravaka</h4>
+}
