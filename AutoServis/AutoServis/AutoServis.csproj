@@ -551,7 +551,6 @@
     <Content Include="Views\Serviser\EditRepair.cshtml" />
     <Content Include="Views\Serviser\Archive.cshtml" />
     <Content Include="Views\Serviser\IndexZamjenskaVozila.cshtml" />
-    <Content Include="Views\Print\PrintView.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

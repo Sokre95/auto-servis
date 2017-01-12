@@ -43,7 +43,7 @@
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
-                    <div class="panel panel-primary">
+                    <div class="panel panel-primary popravakPanel" id="@popravak.Id">
                         <div class="panel-heading">
                             <h4>Popravak vozila: @popravak.Vozilo</h4>
                         </div>
@@ -85,7 +85,10 @@
                         <form class="form">
                             @Html.Hidden("popravakId", popravak.Id)
                             <button type="submit" class="btn btn-primary">Izmjeni</button>
-                            <a id="printButton" class="btn btn-primary" onclick="print(@popravak.Id);">Ispiši obrazac</a>
+                            <a id="printButton" class="btn btn-primary" onclick="print(@popravak.Id)">Ispiši obrazac</a>
+                            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#archiveModal">
+                                Završi popravak
+                            </button>
                         </form>
                     }
                 </div>
@@ -97,6 +100,7 @@
         <p>Nema aktivnih popravaka</p>
     }
 </div>
+
 
 <script>
     function print(id) {
@@ -116,17 +120,12 @@
         html += "<a href=\"info@servis.com\">info@servis.com</a>";
         html += "<hr/>";
         var currentdate = new Date();
-        var datetime = currentdate.getDate() +
-            "/" +
-            (currentdate.getMonth() + 1) +
-            "/" +
-            currentdate.getFullYear() +
-            " " +
-            currentdate.getHours() +
-            ":" +
-            currentdate.getMinutes() +
-            ":" +
-            currentdate.getSeconds();
+        var datetime = currentdate.getDate() + "/"
+                        + (currentdate.getMonth() + 1) + "/"
+                        + currentdate.getFullYear() + " "
+                        + currentdate.getHours() + ":"
+                        + currentdate.getMinutes() + ":"
+                        + currentdate.getSeconds();
         html += "<p>Vrijeme ispisa obrazca: " + datetime + "</p>";
         html += "</body>";
 
