@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using reCAPTCHA.MVC;
 
 namespace AutoServis.Controllers
 {
@@ -48,6 +49,7 @@ namespace AutoServis.Controllers
             return View();
         }
 
+        [CaptchaValidator]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -128,6 +130,7 @@ namespace AutoServis.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [CaptchaValidator]
         public async Task<ActionResult> Register(KorisnikViewModel model)
         {
             if (ModelState.IsValid)

@@ -4,7 +4,7 @@
 }
 
 <h2>@ViewBag.Title</h2>
-
+@using reCAPTCHA.MVC
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
 {
     @Html.AntiForgeryToken()
@@ -78,6 +78,10 @@
             @Html.DropDownListFor(m => m.TipVozilaId, new SelectList(Model.TipoviVozila, "Id", "Naziv"), "Odaberite tip vozila", new {@class = "form-control"})
             @Html.ValidationMessageFor(m => m.TipVozilaId)
         </div>
+    </div>
+    <div class="col-md-10 col-md-offset-2">
+        @Html.Recaptcha()
+        @Html.ValidationMessage("ReCaptcha")
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
