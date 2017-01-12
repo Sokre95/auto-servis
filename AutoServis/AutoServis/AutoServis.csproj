@@ -383,6 +383,7 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\flatly.css" />
+    <Content Include="Content\print.css" />
     <Content Include="Content\repair.jpg" />
     <Content Include="Content\Styles.css" />
     <Content Include="favicon.ico" />
@@ -623,6 +624,7 @@
     <Content Include="Views\Serviser\EditRepair.cshtml" />
     <Content Include="Views\Serviser\Archive.cshtml" />
     <Content Include="Views\Serviser\IndexZamjenskaVozila.cshtml" />
+    <Content Include="Views\Print\PrintView.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

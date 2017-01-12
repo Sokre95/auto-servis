@@ -1,0 +1,13 @@
+﻿@media print {
+  body * {
+    visibility: hidden;
+  }
+  .popravakPanel{
+    visibility: visible;
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
