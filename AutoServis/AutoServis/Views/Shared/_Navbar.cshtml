@@ -12,17 +12,21 @@
             <ul class="nav navbar-nav">
                 @if (User.IsInRole("Korisnik"))
                 {
-                    <li>@Html.ActionLink("Moji podaci", "Index", "Korisnik")</li>
+                    <li>@Html.ActionLink("Početna", "Index", "Korisnik")</li>
                     <li>@Html.ActionLink("Dodaj vozilo", "Add", "Korisnik")</li>
                     <li>@Html.ActionLink("Zatraži popravak", "Repair", "Korisnik")</li>
                 }
                 @if (User.IsInRole("Serviser"))
                 {
-                    <li>@Html.ActionLink("Početna stranica", "Index", "Serviser")</li>
+                    <li>@Html.ActionLink("Početna", "Index", "Serviser")</li>
+                    <li>@Html.ActionLink("Nadolazeći popravci", "IncomingRepairs", "Serviser")</li>
+                    <li>@Html.ActionLink("Aktivni popravci", "ActiveRepairs", "Serviser")</li>
+                    <li>@Html.ActionLink("Zamjenska vozila", "IndexZamjenskaVozila", "Serviser")</li>
+                    <li>@Html.ActionLink("Arhiva", "Archive", "Serviser")</li>
                 }
                 @if (User.IsInRole("Admin"))
                 {
-                    <li>@Html.ActionLink("Početna stranica", "Index", "Admin")</li>
+                    <li>@Html.ActionLink("Početna", "Index", "Admin")</li>
                     <li>@Html.ActionLink("Serviseri", "Serviseri", "Admin")</li>
                     <li>@Html.ActionLink("Korisnici", "Korisnici", "Admin")</li>
                     <li>@Html.ActionLink("Kontakt podaci", "KontaktServisa", "Admin")</li>
