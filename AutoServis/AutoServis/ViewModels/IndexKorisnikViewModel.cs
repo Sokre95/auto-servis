@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using AutoServis.ViewModels;
+﻿using System.Collections.Generic;
 
 namespace AutoServis.ViewModels
 {
@@ -16,6 +12,8 @@ namespace AutoServis.ViewModels
 
         public string BrojTel { get; set; }
 
-        public IEnumerable<VoziloViewModel> Vozila { get; set; }
+        public ICollection<VoziloViewModel> Vozila { get; set; }
+
+        public List<PopravakViewModel> Popravci { get; set; }
     }
 }

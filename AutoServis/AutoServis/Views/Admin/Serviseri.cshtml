@@ -8,21 +8,22 @@
 <h2>Serviseri</h2>
 <hr/>
 <div class="form-group">
-    <div class="btn btn-default">@Html.ActionLink("Dodaj servisera", "DodajServisera", "Admin")</div>
+    <div class="btn btn-primary">@Html.ActionLink("Dodaj servisera", "DodajServisera", "Admin")</div>
 </div>
 
-<div id ="modul-korisnici">
+<div id="modul-korisnici">
     @Html.Partial("_Korisnici")
 </div>
 
-@section Scripts 
+@section Scripts
 {
     <script>
-        
-        $(document).ready(function () {
-            $("#korisnici").DataTable();
-            $(".del").click(Delete);
-        });
+
+        $(document)
+            .ready(function() {
+                $("#korisnici").DataTable();
+                $(".del").click(Delete);
+            });
 
         function Delete(uloga) {
             var serviserId = $(this).data("korisnik-id");
@@ -30,22 +31,24 @@
             $.ajax({
                 method: "POST",
                 url: url,
-                success: function () {
+                success: function() {
                     Refresh();
-                    alert("Brisanje servisera uspješno.")
+                    alert("Brisanje servisera uspješno.");
                 },
-                error: function () {
-                    alert("Neuspješno brisanje servisera")
+                error: function() {
+                    alert("Neuspješno brisanje servisera");
                 }
             });
         }
 
         function Refresh() {
-            $("#modul-korisnici").load('/Admin/OsvjeziServisere', function () {
-                $('#korisnici').DataTable();
-                $(".del").click(Delete);
-            });
+            $("#modul-korisnici")
+                .load('/Admin/OsvjeziServisere',
+                    function() {
+                        $('#korisnici').DataTable();
+                        $(".del").click(Delete);
+                    });
         }
 
-    </script>        
+    </script>
 }

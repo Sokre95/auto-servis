@@ -1,7 +1,9 @@
-﻿using Microsoft.Owin;
+﻿using AutoServis;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(AutoServis.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
+
 namespace AutoServis
 {
     public partial class Startup

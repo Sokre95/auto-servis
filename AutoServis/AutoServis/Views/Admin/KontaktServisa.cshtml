@@ -7,59 +7,60 @@
 
 <h2>Izmjena kontakt podataka</h2>
 
-@using (Html.BeginForm("KontaktServisa", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("KontaktServisa", "Admin", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
 {
-	@Html.AntiForgeryToken();
+    @Html.AntiForgeryToken()
+    ;
 
-	<hr/>
+    <hr/>
 
-	<div class="form-group">
-		@Html.LabelFor(m => m.ImeServisa, new {@class = "col-md-2 control-label"})
-		<div class="col-md-10">
-			@Html.TextBoxFor(m => m.ImeServisa, new {@class = "form-control"})
-			@Html.ValidationMessageFor(m => m.ImeServisa)
-		</div>
-	</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ImeServisa, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ImeServisa, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.ImeServisa)
+        </div>
+    </div>
 
-	<div class="form-group">
-		@Html.LabelFor(m => m.Adresa, new {@class = "col-md-2 control-label"})
-		<div class="col-md-10">
-			@Html.TextBoxFor(m => m.Adresa, new {@class = "form-control"})
-			@Html.ValidationMessageFor(m => m.Adresa)
-		</div>
-	</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Adresa, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Adresa, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Adresa)
+        </div>
+    </div>
 
-	<div class="form-group">
-		@Html.LabelFor(m => m.Mjesto, new {@class = "col-md-2 control-label"})
-		<div class="col-md-10">
-			@Html.TextBoxFor(m => m.Mjesto, new {@class = "form-control"})
-			@Html.ValidationMessageFor(m => m.Mjesto)
-		</div>
-	</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Mjesto, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Mjesto, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Mjesto)
+        </div>
+    </div>
 
-	<div class="form-group">
-		@Html.LabelFor(m => m.Email, new {@class = "col-md-2 control-label"})
-		<div class="col-md-10">
-			@Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
-			@Html.ValidationMessageFor(m => m.Email)
-		</div>
-	</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+    </div>
 
-	<div class="form-group">
-		@Html.LabelFor(m => m.BrojTel, new {@class = "col-md-2 control-label"})
-		<div class="col-md-10">
-			@Html.TextBoxFor(m => m.BrojTel, new {@class = "form-control"})
-			@Html.ValidationMessageFor(m => m.BrojTel)
-		</div>
-	</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.BrojTel, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.BrojTel, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.BrojTel)
+        </div>
+    </div>
 
-	<div class="form-group">
-		<div class="col-md-offset-2 col-md-10">
-			<input type="submit" class="btn btn-primary" value="Izmjeni" />
-		</div>
-	</div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Izmjeni"/>
+        </div>
+    </div>
 }
 
 @section Scripts {
-	@Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
 }

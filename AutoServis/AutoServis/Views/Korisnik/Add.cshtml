@@ -8,42 +8,38 @@
 <h2>Dodajte vozilo</h2>
 
 <hr/>
-
-@using (Html.BeginForm("Add", "Korisnik", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="form-group">
-        @Html.LabelFor(m => m.RegOznaka, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.RegOznaka, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.RegOznaka)
+<div class="well bs-component">
+    @using (Html.BeginForm("Add", "Korisnik", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(m => m.RegOznaka, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.RegOznaka, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.RegOznaka)
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.GodProizv, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.GodProizv, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.GodProizv)
+        <div class="form-group">
+            @Html.LabelFor(m => m.GodProizv, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.GodProizv, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.GodProizv)
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.TipVozilaId, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.TipVozilaId, new SelectList(Model.TipoviVozila, "Id", "Naziv"), "Odaberite tip vozila", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.TipVozilaId)
+        <div class="form-group">
+            @Html.LabelFor(m => m.TipVozilaId, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.TipVozilaId, new SelectList(Model.TipoviVozila, "Id", "Naziv"), "Odaberite tip vozila", new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.TipVozilaId)
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary" value="Dodaj vozilo" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary" value="Dodaj vozilo"/>
+            </div>
         </div>
-    </div>
-}
-
+    }
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-
-
-

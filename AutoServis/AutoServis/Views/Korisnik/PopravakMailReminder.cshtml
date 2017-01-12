@@ -1,0 +1,18 @@
+﻿@model AutoServis.ViewModels.RepairInfoViewModel
+
+<h2>Podsjetnik za termin popravka</h2>
+<hr/>
+<h3>Popravak vozila: @Model.Vozilo</h3>
+<p>Vaš termin za dolazak na servis: @Model.OdabraniTermin</p>
+<p>Vaš serviser: @Model.Serviser</p>
+<hr/>
+<p>Zahvaljujemo na ukazanom povjerenju</p>
+<h4>Auto servis Najbolji Mehaničar</h4>
+<address>
+    @Model.Kontakt.Adresa <br/>
+    @Model.Kontakt.Mjesto <br/>
+    Telefon : @Model.Kontakt.BrojTel
+</address>
+<address>
+    <strong>Email:</strong> <a href="@Model.Kontakt.Email">@Model.Kontakt.Email</a><br/>
+</address>
