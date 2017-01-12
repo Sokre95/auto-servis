@@ -1,0 +1,76 @@
+﻿@model AutoServis.ViewModels.ZamjenskaVozilaViewModel
+
+@{
+    ViewBag.Title = "Zamjenska vozila";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Zamjenska vozila</h2>
+<hr/>
+<div class="list-group col-md-12 well">
+    <h3>Slobodna zamjenska vozila</h3>
+
+    @if (Model.Vozila.Where(vozilo => vozilo.Dostupno.Equals(true)).Count().Equals(0))
+    {
+        <p>Trenutno nema slobodnih zamjenskih vozila</p>
+    }
+    else
+    {
+        <ul class="list-group">
+            @foreach (var vozilo in Model.Vozila.Where(vozilo => vozilo.Dostupno.Equals(true)))
+            {
+                <li class="list-group-item">
+                    <p>Zamjensko vozilo @vozilo.RegOznaka</p>
+                </li>
+            }
+        </ul>
+        <h4>Postavi kao zauzeto</h4>
+        using (Html.BeginForm("EditZamjenskoVozilo", "Serviser", FormMethod.Post))
+        {
+            <div class="form">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Slobodna zamjenska vozila</label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(m => m.Odabrano, new SelectList(Model.Vozila.Where(vozilo => vozilo.Dostupno.Equals(true)), "Id", "RegOznaka"), new {@class = "form-control", placeholder = ""})
+                    </div>
+                </div>
+                @Html.Hidden("type", "postaviKaoDostupno")
+                <div class="form-group col-md-2">
+                    <input type="submit" value="Postavi kao zauzeto" class="btn btn-primary"/>
+                </div>
+            </div>
+        }
+    }
+</div>
+<div class="list-group col-md-12 well">
+    <h3>Zauzeta zamjenska vozila</h3>
+    @if (Model.Vozila.Where(vozilo => vozilo.Dostupno.Equals(false)).Count().Equals(0))
+    {
+        <p>Trenutno nema zauzetih zamjenskih vozila</p>
+    }
+    else
+    {
+        foreach (var vozilo in Model.Vozila.Where(vozilo => vozilo.Dostupno.Equals(false)))
+        {
+            <li class="list-group-item">
+                <p>Zamjensko vozilo @vozilo.RegOznaka</p>
+            </li>
+        }
+        <h4>Postavi kao slobodno</h4>
+        using (Html.BeginForm("EditZamjenskoVozilo", "Serviser", FormMethod.Post))
+        {
+            <div class="form">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Slobodna zamjenska vozila</label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(m => m.Odabrano, new SelectList(Model.Vozila.Where(vozilo => vozilo.Dostupno.Equals(false)), "Id", "RegOznaka"), new {@class = "form-control", placeholder = ""})
+                    </div>
+                </div>
+                @Html.Hidden("type", "postaviKaoNedostupno")
+                <div class="form-group col-md-2">
+                    <input type="submit" value="Postavi kao slobodno" class="btn btn-primary"/>
+                </div>
+            </div>
+        }
+    }
+</div>

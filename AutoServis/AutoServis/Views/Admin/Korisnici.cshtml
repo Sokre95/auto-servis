@@ -1,0 +1,56 @@
+﻿@model IEnumerable<AutoServis.ViewModels.KorisniciZaAdminaViewModel>
+
+@{
+    ViewBag.Title = "Korisnici";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Korisnici</h2>
+<hr/>
+<div class="form-group">
+    <div class="btn btn-primary">@Html.ActionLink("Dodaj korisnika", "DodajKorisnika", "Admin")</div>
+</div>
+
+<div id="modul-korisnici">
+    @Html.Partial("_Korisnici")
+</div>
+
+@section Scripts
+{
+
+    <script>
+
+        $(document)
+            .ready(function() {
+                $("#korisnici").DataTable();
+                $(".del").click(Delete);
+            });
+
+        function Delete() {
+            var korisnikId = $(this).data("korisnik-id");
+            var url = "/Admin/Izbrisi/" + korisnikId;
+            //alert(url);
+            $.ajax({
+                method: "POST",
+                url: url,
+                success: function() {
+                    Refresh();
+                    alert("Brisanje korisnika uspješno.");
+                },
+                error: function() {
+                    alert("Neuspješno brisanje korisnika");
+                }
+            });
+        }
+
+        function Refresh() {
+            $("#modul-korisnici")
+                .load('/Admin/OsvjeziKorisnike',
+                    function() {
+                        $('#korisnici').DataTable();
+                        $(".del").click(Delete);
+                    });
+        }
+
+    </script>
+}

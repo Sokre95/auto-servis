@@ -1,0 +1,25 @@
+﻿@model IEnumerable<AutoServis.ViewModels.KorisniciZaAdminaViewModel>
+
+<table id="korisnici" class="table table-bordered table-hover table-striped">
+    <thead>
+    <tr>
+        <th>Ime i prezime</th>
+        <th>Broj telefona</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var korisnik in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(korisnik.Ime + " " + korisnik.Prezime, "Izmjeni", "Admin", new {id = korisnik.Id}, null)</td>
+            <td>@korisnik.BrojTel</td>
+            <td>@korisnik.Email</td>
+            <td>
+                <button data-korisnik-id="@korisnik.Id" class="btn btn-link del">Izbrisi</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

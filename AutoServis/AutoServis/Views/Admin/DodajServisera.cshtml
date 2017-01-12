@@ -1,0 +1,23 @@
+﻿@model AutoServis.ViewModels.ServiserViewModel
+
+@{
+    ViewBag.Title = "DodajServisera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dodajte novog servisera u sustav</h2>
+
+@using (Html.BeginForm("DodajServisera", "Admin", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("_ServiserForm")
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Dodaj servisera"/>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

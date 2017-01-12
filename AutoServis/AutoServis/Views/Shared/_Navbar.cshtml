@@ -1,0 +1,42 @@
+﻿<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Najbolji mehaničar", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                @if (User.IsInRole("Korisnik"))
+                {
+                    <li>@Html.ActionLink("Početna", "Index", "Korisnik")</li>
+                    <li>@Html.ActionLink("Dodaj vozilo", "Add", "Korisnik")</li>
+                    <li>@Html.ActionLink("Zatraži popravak", "Repair", "Korisnik")</li>
+                }
+                @if (User.IsInRole("Serviser"))
+                {
+                    <li>@Html.ActionLink("Početna", "Index", "Serviser")</li>
+                    <li>@Html.ActionLink("Nadolazeći popravci", "IncomingRepairs", "Serviser")</li>
+                    <li>@Html.ActionLink("Aktivni popravci", "ActiveRepairs", "Serviser")</li>
+                    <li>@Html.ActionLink("Zamjenska vozila", "IndexZamjenskaVozila", "Serviser")</li>
+                    <li>@Html.ActionLink("Arhiva", "Archive", "Serviser")</li>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("Početna", "Index", "Admin")</li>
+                    <li>@Html.ActionLink("Serviseri", "Serviseri", "Admin")</li>
+                    <li>@Html.ActionLink("Korisnici", "Korisnici", "Admin")</li>
+                    <li>@Html.ActionLink("Kontakt podaci", "KontaktServisa", "Admin")</li>
+                }
+                @if (!User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                }
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>

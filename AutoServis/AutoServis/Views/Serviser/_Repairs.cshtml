@@ -1,0 +1,85 @@
+﻿@model IEnumerable<AutoServis.ViewModels.PopravakZaServiseraViewModel>
+
+@foreach (var popravak in Model.AsEnumerable())
+{
+    <div class="well">
+        <div class="panel panel-primary popravakPanel" id="@popravak.Id">
+            <div class="panel-heading">
+                <h4>Popravak vozila: @popravak.Vozilo</h4>
+            </div>
+            <div class="panel-body">
+                <p>Korisnik: @popravak.Korisnik</p>
+                <p>
+                    Termin dolaska korisnika na servis: <strong>@popravak.Termin.ToString()</strong>
+                </p>
+                <p>Usluge:</p>
+                <ul class="list-group list">
+                    @foreach (var usluga in popravak.Usluge)
+                    {
+                        <li class="list-group-item">@usluga</li>
+                    }
+                </ul>
+                @if (popravak.ZamjenskoVozilo != null)
+                {
+                    <p>Zamjensko vozilo: @popravak.ZamjenskoVozilo</p>
+                }
+                else
+                {
+                    <p>Zamjensko vozilo nije odabrano</p>
+                }
+                <p>Dodatan opis: @popravak.DodatniOpis</p>
+                <p>Napomena servisera: @popravak.Napomena</p>
+                @if (@popravak.ZamjenskoVozilo != null)
+                {
+                    <p>Zamjensko vozilo: @popravak.ZamjenskoVozilo</p>
+                }
+                else
+                {
+                    <p>Zamjensko vozilo nije odabrano</p>
+                }
+            </div>
+        </div>
+
+       @using (Html.BeginForm("EditRepair", "Serviser", FormMethod.Get))
+        {
+            <form class="form">
+                @Html.Hidden("popravakId", popravak.Id)
+                <button type="submit" class="btn btn-primary">Izmjeni</button>
+                <a id="printButton" class="btn btn-primary" onclick="print(@popravak.Id)">Ispiši obrazac</a>
+            </form>
+        }
+    </div>
+}
+
+<script>
+    function print(id) {
+        var w = window.open();
+
+        var div = $("#" + id + ".popravakPanel").html();
+                
+        var html = "<!DOCTYPE HTML>";
+        html += '<html lang="en-us">';
+        html += '<head></head>';
+
+        html += "<body>";
+        html += "<h2>Potvrda predaje vozila na servis</h2><hr/>";
+        if (div != null) html += div;
+        html += "<hr/><h4>Auto servis Najbolji Mehaničar</h4>";
+        html += "<address>Trg bana Josipa Jelacica 1 <br>10000 Zagreb <br>Telefon : 45555123</address>";
+        html += "<a href=\"info@servis.com\">info@servis.com</a>";
+        html += "<hr/>";
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"
+                        + (currentdate.getMonth() + 1) + "/"
+                        + currentdate.getFullYear() + " "
+                        + currentdate.getHours() + ":"
+                        + currentdate.getMinutes() + ":"
+                        + currentdate.getSeconds();
+        html += "<p>Vrijeme ispisa obrazca: " + datetime + "</p>";
+        html += "</body>";
+
+        w.document.write(html);
+        w.window.print();
+        w.document.close();
+    }
+</script>

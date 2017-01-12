@@ -1,0 +1,23 @@
+﻿@model AutoServis.Models.Kontakt
+
+@{
+    ViewBag.Title = "Kontakt";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<address>
+    @Model.Adresa <br/>
+    @Model.Mjesto <br/>
+</address>
+<hr/>
+<p>
+    Telefon : @Model.BrojTel <br/>
+    Radno vrijeme: <strong>7:00 - 18:00 h</strong><br/>
+    Zaprimanje vozila: <strong>7:00 - 10:00 h</strong> <br/>
+    Preuzimanje vozila: <strong>14:00 - 18:00 h</strong> <br/><br/>
+    Napomena: <strong>Sve usluge moguće je obaviti samo radnim danom.</strong>
+</p>
+<p>
+    Support: <a href="mailto:@Model.Email" target="_top">@Model.Email</a>
+</p>
