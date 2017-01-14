@@ -7,7 +7,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <p class="navbar-text">Pozdrav @User.Identity.GetUserName()!</p>
+                <p class="navbar-text">Pozdrav @User.Identity.GetUserName().Split('@')[0] !</p>
             </li>
             <li>
                 <a href="javascript:document.getElementById('logoutForm').submit()">Odjava</a>

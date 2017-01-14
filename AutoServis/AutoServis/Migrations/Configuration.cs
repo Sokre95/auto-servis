@@ -1,6 +1,11 @@
 using System;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Migrations.Model;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Razor;
 using AutoServis.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -23,9 +28,19 @@ namespace AutoServis.Migrations
             var korisnikRole = new IdentityRole("Korisnik");
             var serviserRole = new IdentityRole("Serviser");
             var adminRole = new IdentityRole("Admin");
-            roleManager.Create(korisnikRole);
-            roleManager.Create(serviserRole);
-            roleManager.Create(adminRole);
+
+            if (!context.Roles.Any(r => r.Name == "Korisnik"))
+            {
+                roleManager.Create(korisnikRole);
+            }
+            if (!context.Roles.Any(r => r.Name == "Serviser"))
+            {
+                roleManager.Create(serviserRole);
+            }
+            if (!context.Roles.Any(r => r.Name == "Admin"))
+            {
+                roleManager.Create(adminRole);
+            }
             //admin
             var admin = new ApplicationUser
             {
@@ -44,12 +59,49 @@ namespace AutoServis.Migrations
                 context.SaveChanges();
                 userManager.AddToRole(admin.Id, "Admin");
             }
+            // korisnik
+            var korisnik = new Korisnik
+            {
+                Ime = "Ivan",
+                Prezime = "Ivic",
+                Email = "user@users.com",
+                UserName = "user@users.com",
+                PhoneNumber = "0991234568",
+                PasswordHash = passwordHasher.HashPassword("123456"),
+                LockoutEnabled = true,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            if (!context.Users.Any(user => user.UserName.Equals("user@users.com")))
+            {
+                context.Users.AddOrUpdate(korisnik);
+                context.SaveChanges();
+                userManager.AddToRole(korisnik.Id, "Korisnik");
+            }
+
+            // serviser
+            var serviser = new Serviser()
+            {
+                Ime = "Pero",
+                Prezime = "Peric",
+                Email = "serviser@servis.com",
+                UserName = "serviser@servis.com",
+                PhoneNumber = "0991234569",
+                LockoutEnabled = true,
+                PasswordHash = passwordHasher.HashPassword("123456"),
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            if (!context.Users.Any(user => user.UserName.Equals("serviser@servis.com")))
+            {
+                context.Users.AddOrUpdate(serviser);
+                context.SaveChanges();
+                userManager.AddToRole(serviser.Id, "Serviser");
+            }
             //kontakt
             context.Kontakti.AddOrUpdate(kontakt => kontakt.Id, new Kontakt
             {
                 Id = 1,
-                ImeServisa = "Najbolji mehanilar",
-                Adresa = "Trg bana Josipa Jelaèiæa 1",
+                ImeServisa = "Najbolji mehanicar",
+                Adresa = "Trg bana Josipa Jelacica 1",
                 Mjesto = "10000 Zagreb",
                 Email = "info@servis.com",
                 BrojTel = "45555123"
@@ -119,17 +171,17 @@ namespace AutoServis.Migrations
             Usluga[] usluge =
             {
                 new Usluga {Id = 1, Opis = "Izmjena ulja motora"},
-                new Usluga {Id = 2, Opis = "Ugradnja koèionih ploèica"},
+                new Usluga {Id = 2, Opis = "Ugradnja kocionih plocica"},
                 new Usluga {Id = 3, Opis = "Izmjena filtera zraka"},
                 new Usluga {Id = 4, Opis = "Promjena diskova"},
-                new Usluga {Id = 5, Opis = "Podešavanje paljena"},
+                new Usluga {Id = 5, Opis = "Podesavanje paljena"},
                 new Usluga {Id = 6, Opis = "Izmjena filtera ulja"},
-                new Usluga {Id = 7, Opis = "Izmjena zupèastog remena i zatezaèa"},
-                new Usluga {Id = 8, Opis = "Punjenje i kontrola klima ureðaja"},
+                new Usluga {Id = 7, Opis = "Izmjena zupcastog remena i zatezaca"},
+                new Usluga {Id = 8, Opis = "Punjenje i kontrola klima uredaja"},
                 new Usluga {Id = 9, Opis = "Dijagnostika kvarova"},
-                new Usluga {Id = 10, Opis = "Provjera tekuæina(hlaðenje, koèenje)"},
-                new Usluga {Id = 11, Opis = "Izmjena zupèastog remena i zatezaèa"},
-                new Usluga {Id = 12, Opis = "Ultrazvuèno èišæenje injektora"}
+                new Usluga {Id = 10, Opis = "Provjera tekucina(hladenje, kocenje)"},
+                new Usluga {Id = 11, Opis = "Izmjena zupcastog remena i zatezaca"},
+                new Usluga {Id = 12, Opis = "Ultrazvucno ciscenje injektora"}
             };
             context.Usluge.AddOrUpdate(usluge);
             // zamjenska vozila
@@ -197,3 +249,4 @@ namespace AutoServis.Migrations
         }
     }
 }
+ 
