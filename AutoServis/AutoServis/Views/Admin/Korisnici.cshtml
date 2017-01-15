@@ -8,8 +8,9 @@
 <h2>Korisnici</h2>
 <hr/>
 <div class="form-group">
-    <div class="btn btn-primary">@Html.ActionLink("Dodaj korisnika", "DodajKorisnika", "Admin")</div>
+    @Html.ActionLink("Dodaj korisnika", "DodajKorisnika", "Admin", null, new { @class = "btn btn-primary" })
 </div>
+
 
 <div id="modul-korisnici">
     @Html.Partial("_Korisnici")

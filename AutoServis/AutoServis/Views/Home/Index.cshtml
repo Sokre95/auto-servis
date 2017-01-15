@@ -34,12 +34,12 @@
         <h2>O servisu</h2>
         <p>
             Naš servis "Najbolji mehaničar" nudi najbržu i najpouzdaniju uslugu u dijagnostici i popravku automobila.
-            Registrirajte se jednim klikom.
+            
             @if (!Request.IsAuthenticated)
             {
-                <div class="btn btn-primary">
-                    @Html.ActionLink("Registracija", "Register", "Account")
-                </div>
+                
+                <p>Registrirajte se jednim klikom!</p> 
+                @Html.ActionLink("Registracija", "Register", "Account", null, new { @class = "btn btn-primary" })
             }
         </p>
     </div>

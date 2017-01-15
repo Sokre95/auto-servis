@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Migrations.Model;
 using System.Linq;
@@ -100,8 +100,8 @@ namespace AutoServis.Migrations
             context.Kontakti.AddOrUpdate(kontakt => kontakt.Id, new Kontakt
             {
                 Id = 1,
-                ImeServisa = "Najbolji mehanicar",
-                Adresa = "Trg bana Josipa Jelacica 1",
+                ImeServisa = "Najbolji mehaničar",
+                Adresa = "Trg bana Josipa Jelačića 1",
                 Mjesto = "10000 Zagreb",
                 Email = "info@servis.com",
                 BrojTel = "45555123"
@@ -170,18 +170,19 @@ namespace AutoServis.Migrations
             // usluge
             Usluga[] usluge =
             {
-                new Usluga {Id = 1, Opis = "Izmjena ulja motora"},
-                new Usluga {Id = 2, Opis = "Ugradnja kocionih plocica"},
+               
+            new Usluga {Id = 1, Opis = "Izmjena ulja motora"},
+                new Usluga {Id = 2, Opis = "Ugradnja kočionih pločica"},
                 new Usluga {Id = 3, Opis = "Izmjena filtera zraka"},
                 new Usluga {Id = 4, Opis = "Promjena diskova"},
-                new Usluga {Id = 5, Opis = "Podesavanje paljena"},
+                new Usluga {Id = 5, Opis = "Podešavanje paljena"},
                 new Usluga {Id = 6, Opis = "Izmjena filtera ulja"},
-                new Usluga {Id = 7, Opis = "Izmjena zupcastog remena i zatezaca"},
-                new Usluga {Id = 8, Opis = "Punjenje i kontrola klima uredaja"},
+                new Usluga {Id = 7, Opis = "Izmjena zupčastog remena i zatezača"},
+                new Usluga {Id = 8, Opis = "Punjenje i kontrola klima uređaja"},
                 new Usluga {Id = 9, Opis = "Dijagnostika kvarova"},
-                new Usluga {Id = 10, Opis = "Provjera tekucina(hladenje, kocenje)"},
-                new Usluga {Id = 11, Opis = "Izmjena zupcastog remena i zatezaca"},
-                new Usluga {Id = 12, Opis = "Ultrazvucno ciscenje injektora"}
+                new Usluga {Id = 10, Opis = "Provjera tekućina(hlađenje, kočenje)"},
+                new Usluga {Id=11,Opis= "Pregled ispušnog sustava" },
+                new Usluga {Id = 12, Opis = "Ultrazvučno čisćenje injektora"}
             };
             context.Usluge.AddOrUpdate(usluge);
             // zamjenska vozila
