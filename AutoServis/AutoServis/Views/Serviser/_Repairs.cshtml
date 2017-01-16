@@ -29,18 +29,10 @@
                 }
                 <p>Dodatan opis: @popravak.DodatniOpis</p>
                 <p>Napomena servisera: @popravak.Napomena</p>
-                @if (@popravak.ZamjenskoVozilo != null)
-                {
-                    <p>Zamjensko vozilo: @popravak.ZamjenskoVozilo</p>
-                }
-                else
-                {
-                    <p>Zamjensko vozilo nije odabrano</p>
-                }
             </div>
         </div>
 
-       @using (Html.BeginForm("EditRepair", "Serviser", FormMethod.Get))
+        @using (Html.BeginForm("EditRepair", "Serviser", FormMethod.Get))
         {
             <form class="form">
                 @Html.Hidden("popravakId", popravak.Id)
@@ -56,7 +48,7 @@
         var w = window.open();
 
         var div = $("#" + id + ".popravakPanel").html();
-                
+
         var html = "<!DOCTYPE HTML>";
         html += '<html lang="en-us">';
         html += '<head></head>';
@@ -69,12 +61,17 @@
         html += "<a href=\"info@servis.com\">info@servis.com</a>";
         html += "<hr/>";
         var currentdate = new Date();
-        var datetime = currentdate.getDate() + "/"
-                        + (currentdate.getMonth() + 1) + "/"
-                        + currentdate.getFullYear() + " "
-                        + currentdate.getHours() + ":"
-                        + currentdate.getMinutes() + ":"
-                        + currentdate.getSeconds();
+        var datetime = currentdate.getDate() +
+            "/" +
+            (currentdate.getMonth() + 1) +
+            "/" +
+            currentdate.getFullYear() +
+            " " +
+            currentdate.getHours() +
+            ":" +
+            currentdate.getMinutes() +
+            ":" +
+            currentdate.getSeconds();
         html += "<p>Vrijeme ispisa obrazca: " + datetime + "</p>";
         html += "</body>";
 
