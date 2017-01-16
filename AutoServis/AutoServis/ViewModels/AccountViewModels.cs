@@ -104,6 +104,10 @@ namespace AutoServis.ViewModels
     {
     }
 
+    public class KorisnikViewModelForAdminChanges : RegisterViewModel
+    {
+    }
+
     public class ResetPasswordViewModel
     {
         [Required]

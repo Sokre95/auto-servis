@@ -13,7 +13,7 @@
         @Html.AntiForgeryToken()
         <div class="form-horizontal" id="createRepairForm">
             <div class="form-group">
-                <p class="col-md-offset-2 col-md-10">Odaberite jedan od dostupnih termina u slijedecih 10 dana</p>
+                <p class="col-md-offset-2 col-md-10">Odaberite jedan od dostupnih termina u sljedećih 10 dana</p>
                 @Html.LabelFor(m => m.OdabraniTermin, new {@class = "col-md-2 control-label"})
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.OdabraniTermin, Model.DostupniTermini, "Odaberite termin", new {@class = "form-control"})

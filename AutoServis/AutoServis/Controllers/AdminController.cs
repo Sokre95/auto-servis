@@ -33,7 +33,7 @@ namespace AutoServis.Controllers
 
         public ActionResult Serviseri()
         {
-            return View(DohvatiKorisnikePoUlozi("serviser"));
+            return View(DohvatiKorisnikePoUlozi("Serviser"));
         }
 
         public ActionResult Korisnici()
@@ -129,9 +129,9 @@ namespace AutoServis.Controllers
             return View(model);
         }
 
-        public ActionResult Izmjeni(string Id)
+        public ActionResult Izmjeni(string id)
         {
-            var korisnik = _context.Users.FirstOrDefault(u => u.Id == Id);
+            var korisnik = _context.Users.FirstOrDefault(u => u.Id == id);
 
             var uloge = korisnik.Roles;
 
@@ -148,8 +148,17 @@ namespace AutoServis.Controllers
             return RedirectToAction("Serviseri");
         }
 
-        public void IzmjeniKorisnika(Korisnik korisnik)
+        public ActionResult IzmjeniKorisnika(Korisnik korisnik)
         {
+            var viewModel = new KorisnikViewModelForAdminChanges
+            {
+                Ime = korisnik.Ime,
+                Prezime = korisnik.Prezime,
+                Email = korisnik.Prezime,
+                BrojTel = korisnik.PhoneNumber
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult IzmjeniServisera(Serviser serviser)
@@ -162,6 +171,41 @@ namespace AutoServis.Controllers
                 BrojTel = serviser.PhoneNumber
             };
 
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> IzmjeniServisera(ServiserViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var s = _context.Users.FirstOrDefault(user => user.Email.Equals(viewModel.Email));
+                s.Ime = viewModel.Ime;
+                s.Prezime = viewModel.Prezime;
+                s.PhoneNumber = viewModel.BrojTel;
+                s.Email = viewModel.Email;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Serviseri");
+            }
+            return View(viewModel);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> IzmjeniKorisnika(KorisnikViewModelForAdminChanges viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var kor = _context.Users.FirstOrDefault(user => user.Email.Equals(viewModel.Email));
+                kor.Ime = viewModel.Ime;
+                kor.Prezime = viewModel.Prezime;
+                kor.PhoneNumber = viewModel.BrojTel;
+                kor.Email = viewModel.Email;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Korisnici");
+            }
             return View(viewModel);
         }
 
