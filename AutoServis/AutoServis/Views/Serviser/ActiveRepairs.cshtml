@@ -26,14 +26,14 @@
                                 @using (Html.BeginForm("ArchiveRepair", "Serviser", FormMethod.Post))
                                 {
                                     <div class="modal-body">
-
                                         <p>Potvrdom će se obrazac popravka arhivirati </p>
                                         @if (popravak.ZamjenskoVozilo != null)
                                         {
                                             <p>Ako je korisnik @popravak.Korisnik vratio zamjensko vozilo (@popravak.ZamjenskoVozilo) stavite kvačicu</p>
                                             <label>Zamjensko vozilo vračeno ? @Html.CheckBox("zamjenskoVraceno")</label>
-                                            @Html.Hidden("popravakId", popravak.Id)
+                                            
                                         }
+                                        @Html.Hidden("popravakId", popravak.Id)
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Odustani</button>
