@@ -149,8 +149,11 @@ namespace AutoServis.Controllers
         {
             var popravak = _context.Popravci.Find(int.Parse(Request["popravakId"]));
             var zamjenskoVraceno = Request["zamjenskoVraceno"];
-            if (!zamjenskoVraceno.Equals("false"))
-                _context.ZamjenskaVozila.Find(popravak.ZamjenskoVozilo.Id).Dostupno = true;
+            if (zamjenskoVraceno != null)
+            {
+                if (!zamjenskoVraceno.Equals("false"))
+                    _context.ZamjenskaVozila.Find(popravak.ZamjenskoVozilo.Id).Dostupno = true;
+            }
             _context.Popravci.Find(popravak.Id).Active = false;
             _context.SaveChanges();
 
